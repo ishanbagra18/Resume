@@ -104,7 +104,7 @@ const HomePage = () => {
           </motion.div>
 
           {/* Center Circle or Image Placeholder */}
-          <div className="w-[150px] sm:w-[200px] md:w-[250px] h-[150px] sm:h-[200px] md:h-[250px] rounded-full bg-black border border-gray-700 shadow-xl"></div>
+          <div className="w-[150px] sm:w-[200px] md:w-[250px] h-[150px] sm:h-[200px] md:h-[250px] rounded-full bg-black  shadow-xl"></div>
 
           {/* Right Content */}
           <motion.div
