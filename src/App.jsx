@@ -1,10 +1,31 @@
-import Newsapp from './Component/Newsapp'
+import React from 'react';
+import Navbar from './components/Navbar';
+import HomePage from './components/HomePage';
+import AboutMe from './components/AboutMe';
+import TechStack from './components/TechStack';
+import CodingProfiles from './components/CodingProfiles';
+import MyProject from './components/MyProject';
+import MyCertificate from './components/MyCertificate';
+import ConnectWithMe from './components/ConnectWithMe';
+import Footer from './components/Footer';
+
+
+
 
 function App() {
 
   return (
-    <div style={{backgroundColor:'#F8F2DC'}}>
-      <Newsapp/>
+    <div className='scroll-smooth'>
+      <Navbar />
+      <HomePage />
+      <AboutMe/>
+      <TechStack />
+      <CodingProfiles />
+      <MyProject />
+      <MyCertificate />
+      <ConnectWithMe />
+      <Footer />
+
     </div>
   )
 }
