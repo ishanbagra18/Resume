@@ -13,32 +13,30 @@ const fadeIn = {
 const AboutMe = () => {
   const sectionRef = useRef(null);
 
-  // Set up scroll tracking
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"], // track when section enters and exits viewport
+    offset: ["start end", "end start"],
   });
 
-  // Map scroll progress to vertical movement
   const yParallax = useTransform(scrollYProgress, [0, 1], [-60, 60]);
 
   return (
     <section
       ref={sectionRef}
-      className="h-screen relative bg-black text-white px-6 py-10 lg:px-24 flex flex-col justify-center overflow-hidden"
+      className="min-h-screen relative bg-black text-white px-6 py-16 md:py-20 lg:px-24 flex flex-col justify-center overflow-hidden"
     >
-      {/* Optional Glow Behind Text */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-green-400 blur-3xl opacity-10 rounded-full pointer-events-none" />
+      {/* Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[150px] sm:w-[400px] sm:h-[200px] bg-green-400 blur-3xl opacity-10 rounded-full pointer-events-none" />
 
-      {/* Background Gradient Text with Scroll Parallax */}
+      {/* Parallax Text */}
       <motion.h1
         style={{ y: yParallax }}
-        className="absolute text-[160px] md:text-[200px] font-extrabold bg-gradient-to-r from-teal-500 to-green-400 bg-clip-text text-transparent opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap"
+        className="absolute text-[80px] sm:text-[120px] md:text-[160px] lg:text-[200px] font-extrabold bg-gradient-to-r from-teal-500 to-green-400 bg-clip-text text-transparent opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap"
       >
         ABOUT
       </motion.h1>
 
-      {/* Section Title */}
+      {/* Title */}
       <motion.div
         className="relative z-10 text-center mb-12"
         initial="hidden"
@@ -46,7 +44,7 @@ const AboutMe = () => {
         viewport={{ once: true }}
         variants={fadeIn}
       >
-        <h2 className="text-4xl md:text-5xl font-bold">ABOUT ME</h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">ABOUT ME</h2>
         <motion.div
           animate={{ width: ["10%", "20%", "0%"] }}
           initial={{ width: 0 }}
@@ -60,11 +58,11 @@ const AboutMe = () => {
         ></motion.div>
       </motion.div>
 
-      {/* Flex Content */}
-      <div className="relative z-10 flex flex-col lg:flex-row items-center gap-16">
-        {/* Left Text */}
+      {/* Content */}
+      <div className="relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        {/* Bio Text */}
         <motion.div
-          className="flex-1 text-gray-300 text-base md:text-lg leading-relaxed"
+          className="flex-1 text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -92,19 +90,19 @@ const AboutMe = () => {
           </p>
         </motion.div>
 
-        {/* Right Info Card */}
+        {/* Info Card */}
         <motion.div
-          className="flex-1 backdrop-blur-md bg-white/5 border border-gray-700 p-8 rounded-2xl shadow-xl flex flex-col items-start w-full max-w-md"
+          className="flex-1 backdrop-blur-md bg-white/5 border border-gray-700 p-6 sm:p-8 rounded-2xl shadow-xl flex flex-col items-start w-full max-w-md"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeIn}
           custom={0.4}
         >
-          <h3 className="text-2xl font-semibold mb-6 text-white">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-6 text-white">
             I am a <span className="text-green-400">Web Developer</span>
           </h3>
-          <ul className="space-y-3 text-gray-200 w-full text-base">
+          <ul className="space-y-3 text-gray-200 w-full text-sm sm:text-base">
             <li>
               <span className="text-green-400">•</span>{" "}
               <strong>First Name</strong>: Ishan
@@ -114,8 +112,7 @@ const AboutMe = () => {
               <strong>Last Name</strong>: Bagra
             </li>
             <li>
-              <span className="text-green-400">•</span> <strong>Age</strong>: 20
-              years
+              <span className="text-green-400">•</span> <strong>Age</strong>: 20 years
             </li>
             <li>
               <span className="text-green-400">•</span>{" "}
@@ -126,15 +123,14 @@ const AboutMe = () => {
               <strong>Language</strong>: English, Hindi
             </li>
             <li>
-              <span className="text-green-400">•</span> <strong>Address</strong>
-              : Jaipur, Rajasthan
+              <span className="text-green-400">•</span> <strong>Address</strong>: Jaipur, Rajasthan
             </li>
           </ul>
 
           <a
             href="/ishanresume.pdf"
             download
-            className="mt-8 self-center px-6 py-3 text-white font-medium bg-gradient-to-r from-green-400 to-teal-500 rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+            className="mt-8 self-center px-5 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base text-white font-medium bg-gradient-to-r from-green-400 to-teal-500 rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
           >
             Download Resume
           </a>

@@ -8,6 +8,7 @@ import MyProject from './components/MyProject';
 import MyCertificate from './components/MyCertificate';
 import ConnectWithMe from './components/ConnectWithMe';
 import Footer from './components/Footer';
+import VisitorCounter from './components/VisitorCounter';
 
 
 
@@ -24,6 +25,7 @@ function App() {
       <MyProject />
       <MyCertificate />
       <ConnectWithMe />
+      <VisitorCounter />
       <Footer />
 
     </div>
