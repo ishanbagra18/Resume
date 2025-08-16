@@ -13,6 +13,7 @@
     "@emailjs/browser": "^4.4.1",
     "@react-spring/web": "^9.7.5",
     "axios": "^1.10.0",
+    "firebase": "^11.9.1",
     "framer-motion": "^12.19.1",
     "gsap": "^3.13.0",
     "ogl": "^1.0.11",
