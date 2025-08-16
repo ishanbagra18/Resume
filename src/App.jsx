@@ -8,6 +8,8 @@ import MyProject from './components/MyProject';
 import MyCertificate from './components/MyCertificate';
 import ConnectWithMe from './components/ConnectWithMe';
 import Footer from './components/Footer';
+import Experience from './components/Experience';
+import VisitorCounter from './components/VisitorCounter';
 
 
 
@@ -22,8 +24,10 @@ function App() {
       <TechStack />
       <CodingProfiles />
       <MyProject />
+      <Experience/>
       <MyCertificate />
       <ConnectWithMe />
+      <VisitorCounter/>
       <Footer />
 
     </div>

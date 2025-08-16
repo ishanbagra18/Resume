@@ -24,6 +24,20 @@ const projects = [
     link: 'https://github.com/ishanbagra18/portfolio',
     image: 'https://i.pinimg.com/736x/21/0c/22/210c22ae1d578cc50ad1b201fd7c9ef0.jpg', // Replace with actual image URL
   },
+
+{
+  title: 'ZeroWaste Platform',
+  description: 'A platform connecting vendors with NGOs and upcyclers to redistribute unsold or expiring goods, reducing waste and promoting a circular economy.',
+  techStack: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Cloudinary', 'Tailwind CSS', 'Socket.IO'],
+  link: 'https://github.com/ishanbagra18/zero_waste',
+  image: 'https://i.pinimg.com/736x/3f/8e/45/3f8e452f8a44c901812536b4771ca28d.jpg',
+}
+
+
+
+
+
+
 ];
 
 const MyProjects = () => {
