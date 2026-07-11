@@ -1,3 +1,5 @@
+//add the splashScreen 
+
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
