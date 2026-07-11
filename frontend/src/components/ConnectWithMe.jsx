@@ -1,3 +1,5 @@
+// add the photo of mine
+
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
@@ -50,10 +52,13 @@ const ConnectWithMe = () => {
         </h2>
       </motion.div>
 
+      
+
       {/* Two‑column grid */}
       <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
 
-        {/* ── LEFT — Photo card ── */}
+        {/* ── LEFT — Photo card ── */}  
+        
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
