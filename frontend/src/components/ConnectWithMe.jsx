@@ -24,7 +24,7 @@ const ConnectWithMe = () => {
           alert(`❌ Mail sending failed: ${error.text || 'Something went wrong.'}`);
         }
       );
-  };
+  };  
 
   return (
     <section className="relative bg-black text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-20 overflow-hidden">
