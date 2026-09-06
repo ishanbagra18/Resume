@@ -22,7 +22,6 @@ I enjoy building practical products, solving algorithmic problems, contributing 
 
 * React.js
 * JavaScript
-* HTML5
 * CSS3
 * Tailwind CSS
 * Vite
