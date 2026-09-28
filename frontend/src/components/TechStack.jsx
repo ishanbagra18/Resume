@@ -69,11 +69,11 @@ const TechStack = () => {
           My Toolbox
         </p>
 
-        <div className="relative inline-block">
+        <div className="relative inline-block max-w-full">
           {/* Parallax Background Text centered directly behind main title */}
           <motion.h1
             style={{ y: yParallax }}
-            className="absolute text-[75px] sm:text-[120px] md:text-[160px] lg:text-[200px] leading-none font-black bg-gradient-to-r from-teal-500 to-green-400 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+            className="absolute text-[50px] sm:text-[85px] md:text-[120px] lg:text-[150px] leading-none font-black bg-gradient-to-r from-teal-500 to-green-400 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
           >
             SKILLS & TECH
           </motion.h1>

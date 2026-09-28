@@ -45,11 +45,11 @@ const CodingProfiles = () => {
           Competitive Programming & Open Source
         </p>
 
-        <div className="relative inline-block">
+        <div className="relative inline-block max-w-full">
           {/* Parallax Background Text centered directly behind main title */}
           <motion.h1
             style={{ y: yParallax }}
-            className="absolute text-[65px] sm:text-[110px] md:text-[140px] lg:text-[170px] leading-none font-black bg-gradient-to-r from-purple-500 via-pink-400 to-amber-500 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+            className="absolute text-[45px] sm:text-[75px] md:text-[105px] lg:text-[130px] leading-none font-black bg-gradient-to-r from-purple-500 via-pink-400 to-amber-500 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
           >
             CODING PROFILES
           </motion.h1>

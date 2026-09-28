@@ -77,13 +77,13 @@ const Experience = () => {
           Career Journey & Achievements
         </p>
 
-        <div className="relative inline-block">
+        <div className="relative inline-block max-w-full">
           {/* Parallax Background Text centered directly behind main title */}
           <motion.h1
             style={{ y: yParallax }}
-            className="absolute text-[75px] sm:text-[120px] md:text-[160px] lg:text-[200px] leading-none font-black bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+            className="absolute text-[40px] sm:text-[70px] md:text-[95px] lg:text-[125px] leading-none font-black bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
           >
-            EXPERIENCE
+            WORK & EXPERIENCE
           </motion.h1>
 
           <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">

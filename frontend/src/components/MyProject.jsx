@@ -78,11 +78,11 @@ const MyProjects = () => {
           My Portfolio & Engineering Work
         </p>
 
-        <div className="relative inline-block">
+        <div className="relative inline-block max-w-full">
           {/* Parallax Background Text centered directly behind main title */}
           <motion.h1
             style={{ y: yParallax }}
-            className="absolute text-[75px] sm:text-[120px] md:text-[160px] lg:text-[200px] leading-none font-black bg-gradient-to-r from-green-500 via-teal-500 to-emerald-400 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+            className="absolute text-[45px] sm:text-[75px] md:text-[105px] lg:text-[130px] leading-none font-black bg-gradient-to-r from-green-500 via-teal-500 to-emerald-400 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
           >
             FEATURED BUILDS
           </motion.h1>
