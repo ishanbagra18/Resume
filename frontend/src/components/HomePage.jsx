@@ -1,3 +1,4 @@
+
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter';
@@ -53,6 +54,8 @@ const HomePage = () => {
       </div>
 
       {/* Ambient background glow */}
+      {/* //new design added */}
+
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-r from-green-500/10 to-teal-500/10 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Main content wrapper */}
