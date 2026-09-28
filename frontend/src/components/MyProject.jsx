@@ -61,7 +61,7 @@ const MyProjects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="min-h-screen bg-black text-white px-6 py-24 lg:px-20 overflow-hidden flex flex-col justify-center relative border-t border-zinc-900"
+      className="min-h-screen bg-slate-100/60 dark:bg-black text-slate-900 dark:text-white px-6 py-24 lg:px-20 overflow-hidden flex flex-col justify-center relative border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Background Glow */}
       <div className="absolute top-[120px] left-1/2 -translate-x-1/2 w-[550px] h-[240px] bg-teal-500/10 blur-[150px] rounded-full pointer-events-none" />
@@ -70,7 +70,7 @@ const MyProjects = () => {
       <div className="relative z-10 mb-16 text-center">
         <motion.h1
           style={{ y: yParallax }}
-          className="absolute text-[90px] md:text-[150px] font-extrabold bg-gradient-to-r from-green-500 via-teal-500 to-emerald-400 bg-clip-text text-transparent opacity-5 -top-10 left-1/2 -translate-x-1/2 select-none pointer-events-none whitespace-nowrap font-AlumniSansSC"
+          className="absolute text-[90px] md:text-[150px] font-extrabold bg-gradient-to-r from-green-500 via-teal-500 to-emerald-400 bg-clip-text text-transparent opacity-10 dark:opacity-5 -top-10 left-1/2 -translate-x-1/2 select-none pointer-events-none whitespace-nowrap font-AlumniSansSC"
         >
           FEATURED BUILDS
         </motion.h1>
@@ -84,8 +84,8 @@ const MyProjects = () => {
           <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
             My Portfolio & Engineering Work
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            MY <span className="bg-gradient-to-r from-green-400 via-teal-300 to-teal-500 bg-clip-text text-transparent">PROJECTS</span>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            MY <span className="bg-gradient-to-r from-green-500 via-teal-400 to-teal-600 dark:from-green-400 dark:via-teal-300 dark:to-teal-500 bg-clip-text text-transparent">PROJECTS</span>
           </h2>
           <motion.div
             animate={{ width: ['10%', '20%', '5%'] }}
@@ -112,8 +112,8 @@ const MyProjects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className={`group relative bg-zinc-950/70 border border-zinc-800/80 backdrop-blur-2xl p-7 sm:p-9 rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.7)] transition-all duration-500 ${p.borderColor}`}
-              style={{ boxShadow: `0 10px 40px rgba(0,0,0,0.8), inset 0 0 30px ${p.glow}` }}
+              className={`group relative bg-white/90 dark:bg-zinc-950/70 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-2xl p-7 sm:p-9 rounded-3xl shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.7)] transition-all duration-500 ${p.borderColor}`}
+              style={{ boxShadow: `0 10px 30px rgba(0,0,0,0.06), inset 0 0 30px ${p.glow}` }}
             >
               <div className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 items-center`}>
                 
@@ -123,27 +123,27 @@ const MyProjects = () => {
                     <span className={`text-[10px] uppercase font-mono px-3 py-1 rounded-full bg-gradient-to-r ${p.accent} text-black font-bold shadow-md`}>
                       {p.category}
                     </span>
-                    <span className="text-zinc-400 text-xs font-mono flex items-center gap-1">
-                      <FaStar className="text-yellow-400 text-[10px]" /> Featured Build
+                    <span className="text-zinc-500 dark:text-zinc-400 text-xs font-mono flex items-center gap-1">
+                      <FaStar className="text-yellow-500 dark:text-yellow-400 text-[10px]" /> Featured Build
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white group-hover:text-green-400 transition-colors">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                       {p.title}
                     </h3>
-                    <p className="text-xs font-mono text-teal-400 mt-1 font-semibold">{p.subtitle}</p>
+                    <p className="text-xs font-mono text-teal-600 dark:text-teal-400 mt-1 font-semibold">{p.subtitle}</p>
                   </div>
 
-                  <p className="text-sm sm:text-base text-zinc-300 font-light leading-relaxed">
+                  <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-300 font-light leading-relaxed">
                     {p.description}
                   </p>
 
                   {/* Highlights Badges */}
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     {p.features.map((feat, idx) => (
-                      <div key={idx} className="flex items-center gap-1.5 text-xs text-zinc-300 font-mono bg-white/[0.03] border border-zinc-800/90 px-3 py-1.5 rounded-xl">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                      <div key={idx} className="flex items-center gap-1.5 text-xs text-slate-700 dark:text-zinc-300 font-mono bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-zinc-800/90 px-3 py-1.5 rounded-xl">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-green-400" />
                         <span>{feat}</span>
                       </div>
                     ))}
@@ -154,7 +154,7 @@ const MyProjects = () => {
                     {p.techStack.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="bg-zinc-900 border border-zinc-800 text-zinc-300 text-[11px] px-3 py-1 rounded-full font-mono hover:border-green-500/40 hover:text-green-400 transition-colors"
+                        className="bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 text-[11px] px-3 py-1 rounded-full font-mono hover:border-green-500/40 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                       >
                         {tech}
                       </span>
@@ -178,16 +178,16 @@ const MyProjects = () => {
                 {/* Image Preview Column with macOS Mockup Frame */}
                 <div
                   onClick={() => setPreviewImage({ title: p.title, image: p.image })}
-                  className="flex-1 w-full overflow-hidden rounded-2xl border border-zinc-800/90 shadow-2xl relative group/img cursor-pointer bg-zinc-950 flex flex-col"
+                  className="flex-1 w-full overflow-hidden rounded-2xl border border-slate-200 dark:border-zinc-800/90 shadow-2xl relative group/img cursor-pointer bg-slate-900 dark:bg-zinc-950 flex flex-col"
                 >
                   {/* macOS Window Controls Header */}
-                  <div className="bg-zinc-900/90 px-4 py-2.5 border-b border-zinc-800/80 flex items-center justify-between">
+                  <div className="bg-slate-200 dark:bg-zinc-900/90 px-4 py-2.5 border-b border-slate-300 dark:border-zinc-800/80 flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
                       <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                       <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                       <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                     </div>
-                    <span className="text-[10px] font-mono text-zinc-500 truncate max-w-[180px]">
+                    <span className="text-[10px] font-mono text-slate-600 dark:text-zinc-500 truncate max-w-[180px]">
                       {p.title.toLowerCase()}.app
                     </span>
                     <div className="w-8" />
@@ -221,14 +221,14 @@ const MyProjects = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setPreviewImage(null)}
-            className="fixed inset-0 z-[999999] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 cursor-pointer"
+            className="fixed inset-0 z-[999999] bg-black/90 dark:bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 cursor-pointer"
           >
-            <div className="relative max-w-4xl w-full bg-zinc-950 border border-zinc-800 rounded-3xl p-4 overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
-              <div className="flex items-center justify-between pb-3 px-2 border-b border-zinc-800">
-                <h4 className="text-sm font-bold text-white font-mono">{previewImage.title} — Full Screenshot</h4>
+            <div className="relative max-w-4xl w-full bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-3xl p-4 overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center justify-between pb-3 px-2 border-b border-slate-200 dark:border-zinc-800">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white font-mono">{previewImage.title} — Full Screenshot</h4>
                 <button
                   onClick={() => setPreviewImage(null)}
-                  className="p-2 text-zinc-400 hover:text-white transition-colors"
+                  className="p-2 text-zinc-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-colors"
                 >
                   <FaTimes size={18} />
                 </button>

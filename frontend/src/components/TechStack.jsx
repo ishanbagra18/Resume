@@ -52,7 +52,7 @@ const TechStack = () => {
     <section
       id="skills"
       ref={sectionRef}
-      className="min-h-screen relative bg-black text-white px-6 py-24 lg:px-20 overflow-hidden flex flex-col justify-center border-t border-zinc-900"
+      className="min-h-screen relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white px-6 py-24 lg:px-20 overflow-hidden flex flex-col justify-center border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Background Glow */}
       <div className="absolute top-[120px] left-1/2 -translate-x-1/2 w-[500px] h-[220px] bg-green-400/10 blur-[130px] rounded-full pointer-events-none" />
@@ -61,7 +61,7 @@ const TechStack = () => {
       <div className="relative z-10 mb-12 text-center">
         <motion.h1
           style={{ y: yParallax }}
-          className="absolute text-[90px] md:text-[150px] font-extrabold bg-gradient-to-r from-teal-500 to-green-400 bg-clip-text text-transparent opacity-5 -top-12 left-1/2 -translate-x-1/2 select-none pointer-events-none whitespace-nowrap font-AlumniSansSC"
+          className="absolute text-[90px] md:text-[150px] font-extrabold bg-gradient-to-r from-teal-500 to-green-400 bg-clip-text text-transparent opacity-10 dark:opacity-5 -top-12 left-1/2 -translate-x-1/2 select-none pointer-events-none whitespace-nowrap font-AlumniSansSC"
         >
           SKILLS & TECH
         </motion.h1>
@@ -75,8 +75,8 @@ const TechStack = () => {
           <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
             My Toolbox
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            TECH-<span className="bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">STACK</span>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            TECH-<span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">STACK</span>
           </h2>
           <motion.div
             animate={{ width: ['10%', '20%', '5%'] }}
@@ -102,7 +102,7 @@ const TechStack = () => {
               className={`px-4 py-2 rounded-full text-xs font-semibold font-mono transition-all duration-300 ${
                 activeCategory === cat
                   ? 'bg-gradient-to-r from-green-400 via-teal-400 to-teal-500 text-black shadow-[0_0_20px_rgba(34,197,94,0.4)] scale-105'
-                  : 'bg-zinc-950/80 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'
+                  : 'bg-white dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-zinc-700 shadow-sm'
               }`}
             >
               {cat}
@@ -113,16 +113,16 @@ const TechStack = () => {
         {/* Quick Search & Count */}
         <div className="flex items-center justify-center gap-3 max-w-md mx-auto">
           <div className="relative flex-1">
-            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500 text-xs" />
+            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-500 text-xs" />
             <input
               type="text"
               placeholder="Search technology..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 bg-zinc-950/90 border border-zinc-800/90 rounded-full text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/30 transition-all shadow-inner"
+              className="w-full pl-9 pr-4 py-2.5 bg-white dark:bg-zinc-950/90 border border-slate-200 dark:border-zinc-800/90 rounded-full text-xs text-slate-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/30 transition-all shadow-sm"
             />
           </div>
-          <span className="text-[11px] font-mono text-zinc-400 bg-zinc-950 border border-zinc-800/90 px-3 py-2 rounded-full flex-shrink-0">
+          <span className="text-[11px] font-mono text-slate-600 dark:text-zinc-400 bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/90 px-3 py-2 rounded-full flex-shrink-0 shadow-sm">
             {filteredTechs.length} Techs
           </span>
         </div>
@@ -145,7 +145,7 @@ const TechStack = () => {
                 rotateY: 4,
                 boxShadow: `0 12px 30px ${color}40`,
               }}
-              className="relative group bg-zinc-950/80 border border-zinc-800/90 backdrop-blur-xl p-5 rounded-3xl flex flex-col items-center justify-center text-center shadow-lg cursor-pointer transition-all duration-300 hover:border-zinc-700 overflow-hidden"
+              className="relative group bg-white/90 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800/90 backdrop-blur-xl p-5 rounded-3xl flex flex-col items-center justify-center text-center shadow-md dark:shadow-lg cursor-pointer transition-all duration-300 hover:border-slate-300 dark:hover:border-zinc-700 overflow-hidden"
               style={{ perspective: 1000 }}
             >
               {/* Radial glow background */}
@@ -163,11 +163,11 @@ const TechStack = () => {
               />
 
               <div className="relative z-10 flex flex-col items-center">
-                <Icon size={40} style={{ color }} className="transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
-                <p className="mt-3 text-zinc-200 text-xs md:text-sm font-semibold tracking-wide transition-colors group-hover:text-white">
+                <Icon size={40} style={{ color }} className="transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_4px_10px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
+                <p className="mt-3 text-slate-800 dark:text-zinc-200 text-xs md:text-sm font-semibold tracking-wide transition-colors group-hover:text-slate-900 dark:group-hover:text-white">
                   {name}
                 </p>
-                <span className="mt-1 text-[10px] font-mono text-zinc-500 group-hover:text-zinc-400">
+                <span className="mt-1 text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
                   {category}
                 </span>
               </div>

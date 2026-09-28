@@ -8,7 +8,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white px-6 py-12 lg:px-20 border-t border-zinc-900 relative">
+    <footer className="bg-slate-100 dark:bg-black text-slate-900 dark:text-white px-6 py-12 lg:px-20 border-t border-slate-200 dark:border-zinc-900 relative transition-colors duration-400">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -18,8 +18,8 @@ const Footer = () => {
       >
         {/* Left: Copyright & Name */}
         <div className="text-center md:text-left space-y-1">
-          <p className="font-bold text-base font-Poppins text-white">
-            Ishan Bagra<span className="text-green-400">.</span>
+          <p className="font-bold text-base font-Poppins text-slate-900 dark:text-white">
+            Ishan Bagra<span className="text-green-500 dark:text-green-400">.</span>
           </p>
           <p className="text-xs text-zinc-500 font-mono">
             © {new Date().getFullYear()} Ishan Bagra. Built with React, Tailwind & Framer Motion.
@@ -32,7 +32,7 @@ const Footer = () => {
             href="https://github.com/ishanbagra18"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300"
+            className="p-3 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 shadow-sm"
             title="GitHub"
           >
             <FaGithub size={18} />
@@ -41,7 +41,7 @@ const Footer = () => {
             href="https://www.linkedin.com/in/ishan-bagra-52aa95289/"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300"
+            className="p-3 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 shadow-sm"
             title="LinkedIn"
           >
             <FaLinkedin size={18} />
@@ -50,14 +50,14 @@ const Footer = () => {
             href="https://www.instagram.com/ishanbagra18/?next=%2F"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-pink-500/50 hover:bg-pink-500/10 transition-all duration-300"
+            className="p-3 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:border-pink-500/50 hover:bg-pink-500/10 transition-all duration-300 shadow-sm"
             title="Instagram"
           >
             <FaInstagram size={18} />
           </a>
           <a
             href="mailto:ishanbagra2@gmail.com"
-            className="p-3 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-green-500/50 hover:bg-green-500/10 transition-all duration-300"
+            className="p-3 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:border-green-500/50 hover:bg-green-500/10 transition-all duration-300 shadow-sm"
             title="Email"
           >
             <FaEnvelope size={18} />
@@ -67,7 +67,7 @@ const Footer = () => {
         {/* Right: Back to top button */}
         <button
           onClick={scrollToTop}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-400 hover:text-green-400 hover:border-green-500/40 transition-all duration-300 group"
+          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-xs font-mono text-slate-700 dark:text-zinc-400 hover:text-green-600 dark:hover:text-green-400 hover:border-green-500/40 transition-all duration-300 group shadow-sm"
         >
           <span>Back to top</span>
           <FaArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />

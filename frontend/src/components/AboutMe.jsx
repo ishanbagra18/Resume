@@ -24,7 +24,7 @@ const AboutMe = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen relative bg-zinc-950 text-gray-200 px-6 py-24 lg:px-20 flex flex-col justify-center overflow-hidden border-t border-zinc-900"
+      className="min-h-screen relative bg-slate-100/70 dark:bg-zinc-950 text-slate-800 dark:text-gray-200 px-6 py-24 lg:px-20 flex flex-col justify-center overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Background Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[260px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />
@@ -33,7 +33,7 @@ const AboutMe = () => {
       {/* Parallax Background Text */}
       <motion.h1
         style={{ y: yParallax }}
-        className="absolute text-[80px] sm:text-[130px] md:text-[180px] lg:text-[230px] font-black bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent opacity-[0.03] top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC"
+        className="absolute text-[80px] sm:text-[130px] md:text-[180px] lg:text-[230px] font-black bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent opacity-10 dark:opacity-[0.03] top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC"
       >
         ABOUT ME
       </motion.h1>
@@ -49,8 +49,8 @@ const AboutMe = () => {
         <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
           Get To Know Me
         </p>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight">
-          ABOUT <span className="bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">ME</span>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          ABOUT <span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">ME</span>
         </h2>
         <motion.div
           animate={{ width: ["10%", "24%", "12%"] }}
@@ -69,40 +69,40 @@ const AboutMe = () => {
       <div className="relative z-10 flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16 max-w-6xl mx-auto w-full">
         
         {/* Left: Bio Text */}
-        <div className="flex-1 text-zinc-300 text-base md:text-lg leading-relaxed tracking-wide space-y-6 flex flex-col justify-center">
-          <div className="p-6 rounded-3xl bg-white/[0.02] border border-zinc-800/80 backdrop-blur-sm shadow-xl space-y-5">
+        <div className="flex-1 text-slate-700 dark:text-zinc-300 text-base md:text-lg leading-relaxed tracking-wide space-y-6 flex flex-col justify-center">
+          <div className="p-6 rounded-3xl bg-white/90 dark:bg-white/[0.02] border border-slate-200 dark:border-zinc-800/80 backdrop-blur-sm shadow-xl space-y-5">
             <TextEffect per="char" preset="fade" className="font-light">
-              I am a Computer Science and Engineering student at <span className="text-teal-400 font-semibold">IIIT Kota (Batch 2023–2027)</span> with a passion for software development, problem-solving, and building high-impact digital products.
+              I am a Computer Science and Engineering student at <span className="text-teal-600 dark:text-teal-400 font-semibold">IIIT Kota (Batch 2023–2027)</span> with a passion for software development, problem-solving, and building high-impact digital products.
             </TextEffect>
             
             <TextEffect per="char" preset="fade" className="font-light" delay={0.1}>
-              During my <span className="text-green-400 font-semibold">SDE Internship at udChalo (May 2025 – Aug 2025)</span>, I worked heavily on React Native development. I transformed Figma design guidelines into responsive UI components, optimized runtime performance, and won a dedicated track challenge by udChalo.
+              During my <span className="text-green-600 dark:text-green-400 font-semibold">SDE Internship at udChalo (May 2025 – Aug 2025)</span>, I worked heavily on React Native development. I transformed Figma design guidelines into responsive UI components, optimized runtime performance, and won a dedicated track challenge by udChalo.
             </TextEffect>
             
             <TextEffect per="char" preset="fade" className="font-light" delay={0.2}>
-              I have competed at the highest national engineering forums, winning the prestigious national-level <span className="text-green-400 font-semibold">Smart India Hackathon (SIH) 2025</span>. I also secured a <span className="text-teal-400 font-semibold">Top 10 rank out of 10,000+ participants</span> at Innerve 9.0 hackathon hosted by AIT Pune.
+              I have competed at the highest national engineering forums, winning the prestigious national-level <span className="text-green-600 dark:text-green-400 font-semibold">Smart India Hackathon (SIH) 2025</span>. I also secured a <span className="text-teal-600 dark:text-teal-400 font-semibold">Top 10 rank out of 10,000+ participants</span> at Innerve 9.0 hackathon hosted by AIT Pune.
             </TextEffect>
             
             <TextEffect per="char" preset="fade" className="font-light" delay={0.3}>
-              My full-stack portfolio features real-world applications including <span className="text-green-400 font-medium">GeetHub</span> (Go/Gin & React music app), <span className="text-teal-400 font-medium">ZeroWaste</span> (surplus food redistribution with Socket.IO), and <span className="text-green-400 font-medium">Portfolio.ai</span> (AI-driven portfolio platform built with Supabase).
+              My full-stack portfolio features real-world applications including <span className="text-green-600 dark:text-green-400 font-medium">GeetHub</span> (Go/Gin & React music app), <span className="text-teal-600 dark:text-teal-400 font-medium">ZeroWaste</span> (surplus food redistribution with Socket.IO), and <span className="text-green-600 dark:text-green-400 font-medium">Portfolio.ai</span> (AI-driven portfolio platform built with Supabase).
             </TextEffect>
           </div>
         </div>
 
         {/* Right: Key Stats & Highlights Card */}
         <motion.div
-          className="flex-1 backdrop-blur-xl bg-zinc-900/50 border border-zinc-800 p-8 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.6)] flex flex-col justify-between w-full max-w-lg mx-auto lg:mx-0 hover:border-green-500/30 transition-all duration-300 group"
+          className="flex-1 backdrop-blur-xl bg-white/90 dark:bg-zinc-900/50 border border-slate-200 dark:border-zinc-800 p-8 rounded-3xl shadow-xl dark:shadow-[0_10px_40px_rgba(0,0,0,0.6)] flex flex-col justify-between w-full max-w-lg mx-auto lg:mx-0 hover:border-green-500/30 transition-all duration-300 group"
           initial={{ opacity: 0, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <div>
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
-              <h3 className="text-2xl font-bold text-white tracking-tight">
-                Key <span className="bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">Highlights</span>
+            <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-zinc-800">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+                Key <span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">Highlights</span>
               </h3>
-              <span className="text-xs font-mono px-3 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
+              <span className="text-xs font-mono px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
                 2023 - 2027
               </span>
             </div>
@@ -112,31 +112,31 @@ const AboutMe = () => {
               {stats.map((s) => (
                 <div
                   key={s.label}
-                  className="p-4 rounded-2xl bg-black/40 border border-zinc-800 flex flex-col gap-1 hover:border-zinc-700 transition-colors"
+                  className="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-zinc-800 flex flex-col gap-1 hover:border-slate-300 dark:hover:border-zinc-700 transition-colors"
                 >
                   <s.icon className={`${s.color} text-lg mb-1`} />
-                  <span className="text-xs text-zinc-400 font-mono">{s.label}</span>
-                  <span className="text-base font-bold text-white">{s.value}</span>
+                  <span className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">{s.label}</span>
+                  <span className="text-base font-bold text-slate-900 dark:text-white">{s.value}</span>
                 </div>
               ))}
             </div>
 
             {/* Highlight list */}
-            <ul className="space-y-3 text-zinc-300 text-sm">
+            <ul className="space-y-3 text-slate-700 dark:text-zinc-300 text-sm">
               <li className="flex items-center gap-3">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 font-bold text-xs">✓</span>
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-600 dark:text-green-400 font-bold text-xs">✓</span>
                 <span><strong>SIH 2025</strong> National Winner</span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 font-bold text-xs">✓</span>
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-600 dark:text-green-400 font-bold text-xs">✓</span>
                 <span><strong>udChalo</strong> SDE Intern & Track Winner</span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 font-bold text-xs">✓</span>
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-600 dark:text-green-400 font-bold text-xs">✓</span>
                 <span><strong>Innerve 9.0</strong> Top 10 / 10,000+ Engineers</span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 font-bold text-xs">✓</span>
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-600 dark:text-green-400 font-bold text-xs">✓</span>
                 <span>Full-Stack Projects: <strong>GeetHub, ZeroWaste, Portfolio.ai</strong></span>
               </li>
             </ul>

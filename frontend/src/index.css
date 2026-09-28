@@ -12,9 +12,18 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+html.dark, body.dark {
   background-color: #000000;
   color: #f4f4f5;
-  scroll-behavior: smooth;
+}
+
+html.light, body.light {
+  background-color: #f8fafc;
+  color: #0f172a;
 }
 
 /* Custom Selection */
@@ -32,10 +41,19 @@ html, body {
   background: #000000;
 }
 
+.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
 ::-webkit-scrollbar-thumb {
   background: #27272a;
   border-radius: 9999px;
   border: 2px solid #000000;
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border: 2px solid #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -43,11 +61,18 @@ html, body {
 }
 
 /* Background Patterns */
-.bg-grid-pattern {
+.dark .bg-grid-pattern {
   background-size: 40px 40px;
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.light .bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
 }
 
 .bg-dots-pattern {

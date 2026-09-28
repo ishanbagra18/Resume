@@ -49,7 +49,7 @@ const experiences = [
 ];
 
 const Experience = () => (
-  <section id="experience" className="min-h-screen flex flex-col items-center justify-center px-6 py-24 bg-black relative overflow-hidden border-t border-zinc-900">
+  <section id="experience" className="min-h-screen flex flex-col items-center justify-center px-6 py-24 bg-slate-50 dark:bg-black text-slate-900 dark:text-white relative overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400">
     {/* Background Glow */}
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />
 
@@ -57,15 +57,15 @@ const Experience = () => (
       <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
         Career Journey & Achievements
       </p>
-      <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-        WORK & <span className="bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">EXPERIENCE</span>
+      <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        WORK & <span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">EXPERIENCE</span>
       </h2>
       <div className="h-1 bg-gradient-to-r from-green-400 to-teal-400 mt-3 mx-auto w-24 rounded-full" />
     </div>
 
     <div className="relative flex flex-col items-center w-full max-w-3xl z-10 space-y-12">
       {/* Vertical Glowing Line */}
-      <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-4 h-[calc(100%-2rem)] w-[2px] bg-gradient-to-b from-green-400 via-teal-400 to-zinc-800 rounded-full shadow-[0_0_12px_rgba(34,197,94,0.5)]" />
+      <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-4 h-[calc(100%-2rem)] w-[2px] bg-gradient-to-b from-green-500 via-teal-400 to-slate-300 dark:to-zinc-800 rounded-full shadow-[0_0_12px_rgba(34,197,94,0.5)]" />
       
       {experiences.map((exp, index) => {
         const Icon = exp.icon;
@@ -79,7 +79,7 @@ const Experience = () => (
               aria-hidden="true"
             >
               <span
-                className={`w-12 h-12 flex items-center justify-center bg-gradient-to-br ${exp.color} rounded-full border-4 border-black text-black shadow-xl transition-transform hover:scale-110`}
+                className={`w-12 h-12 flex items-center justify-center bg-gradient-to-br ${exp.color} rounded-full border-4 border-slate-50 dark:border-black text-black shadow-xl transition-transform hover:scale-110`}
                 style={{ boxShadow: `0 0 25px ${exp.glowColor}` }}
               >
                 <Icon className="w-5 h-5 text-black" />
@@ -96,20 +96,20 @@ const Experience = () => (
                 isEven ? 'md:mr-auto md:text-right' : 'md:ml-auto md:text-left'
               }`}
             >
-              <div className="bg-zinc-950/80 border border-zinc-800/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-7 shadow-[0_15px_40px_rgba(0,0,0,0.8)] hover:border-green-500/50 hover:shadow-[0_0_30px_rgba(34,197,94,0.2)] transition-all duration-300 group">
+              <div className="bg-white/90 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-7 shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.8)] hover:border-green-500/50 hover:shadow-[0_0_30px_rgba(34,197,94,0.2)] transition-all duration-300 group">
                 <div className={`flex flex-wrap items-center gap-2 mb-3 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
-                  <span className="text-xs font-mono font-semibold tracking-wider text-green-400 bg-green-500/10 border border-green-500/30 px-3.5 py-1 rounded-full shadow-sm">
+                  <span className="text-xs font-mono font-semibold tracking-wider text-green-600 dark:text-green-400 bg-green-500/10 border border-green-500/30 px-3.5 py-1 rounded-full shadow-sm">
                     {exp.period}
                   </span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-1 group-hover:text-green-400 transition-colors">{exp.role}</h3>
-                <div className="text-teal-400 text-sm font-semibold mb-4">{exp.organization}</div>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-1 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">{exp.role}</h3>
+                <div className="text-teal-600 dark:text-teal-400 text-sm font-semibold mb-4">{exp.organization}</div>
 
-                <ul className="space-y-2 text-zinc-300 text-xs sm:text-sm font-light leading-relaxed mb-5 text-left">
+                <ul className="space-y-2 text-slate-600 dark:text-zinc-300 text-xs sm:text-sm font-light leading-relaxed mb-5 text-left">
                   {exp.points.map((pt, idx) => (
                     <li key={idx} className="flex items-start gap-2.5">
-                      <span className="text-green-400 font-bold text-sm">✓</span>
+                      <span className="text-green-600 dark:text-green-400 font-bold text-sm">✓</span>
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -119,7 +119,7 @@ const Experience = () => (
                   {exp.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[10px] font-mono px-3 py-1 rounded-full bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-teal-500/40 hover:text-teal-300 transition-colors"
+                      className="text-[10px] font-mono px-3 py-1 rounded-full bg-slate-100 dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-zinc-800 hover:border-teal-500/40 hover:text-teal-600 dark:hover:text-teal-300 transition-colors"
                     >
                       {tag}
                     </span>
