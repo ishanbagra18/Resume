@@ -90,31 +90,17 @@ const ConnectWithMe = () => {
 
             {/* Card */}
             <div
-              className="relative overflow-hidden rounded-3xl backdrop-blur-xl border border-green-500/30 shadow-[0_15px_40px_rgba(0,0,0,0.8)]"
-              style={{
-                background: 'linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0) 100%)',
-              }}
+              className="relative overflow-hidden rounded-3xl backdrop-blur-xl border border-green-500/30 shadow-[0_15px_40px_rgba(0,0,0,0.8)] bg-gradient-to-b from-zinc-900/60 via-zinc-950/80 to-black"
             >
               <img
                 src="/me.png"
                 alt="Ishan Bagra"
-                className="w-full"
-                style={{
-                  display: 'block',
-                  objectFit: 'cover',
-                  objectPosition: 'top center',
-                  height: 'clamp(280px, 50vw, 400px)',
-                }}
+                className="w-full h-[340px] sm:h-[380px] md:h-[420px] object-cover object-[center_82%] block transition-all duration-300"
               />
 
               {/* Bottom overlay with name */}
               <div
-                className="px-6 py-5"
-                style={{
-                  background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%)',
-                  marginTop: '-65px',
-                  position: 'relative',
-                }}
+                className="px-6 py-5 bg-gradient-to-t from-black via-black/85 to-transparent -mt-20 relative z-10"
               >
                 <div className="flex items-end justify-between">
                   <div>
@@ -122,7 +108,7 @@ const ConnectWithMe = () => {
                     <p className="text-zinc-400 text-xs font-mono mt-0.5">Full Stack Developer</p>
                   </div>
                   {/* Available badge */}
-                  <div className="flex items-center gap-1.5 bg-green-500/10 border border-green-500/30 rounded-full px-3 py-1 mb-1">
+                  <div className="flex items-center gap-1.5 bg-green-500/10 border border-green-500/30 rounded-full px-3 py-1 mb-1 backdrop-blur-md">
                     <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                     <span className="text-green-400 text-xs font-medium font-mono">Available</span>
                   </div>
