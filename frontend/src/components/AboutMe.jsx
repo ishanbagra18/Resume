@@ -30,15 +30,7 @@ const AboutMe = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[260px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-[350px] h-[200px] bg-teal-500/10 blur-[140px] rounded-full pointer-events-none" />
 
-      {/* Parallax Background Text */}
-      <motion.h1
-        style={{ y: yParallax }}
-        className="absolute text-[80px] sm:text-[130px] md:text-[180px] lg:text-[230px] font-black bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent opacity-10 dark:opacity-[0.03] top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC"
-      >
-        ABOUT ME
-      </motion.h1>
-
-      {/* Section Title */}
+      {/* Section Title Header with Background Text */}
       <motion.div
         className="relative z-10 text-center mb-16"
         initial={{ opacity: 0, y: 30 }}
@@ -49,9 +41,21 @@ const AboutMe = () => {
         <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
           Get To Know Me
         </p>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          ABOUT <span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">ME</span>
-        </h2>
+
+        <div className="relative inline-block">
+          {/* Parallax Background Text centered directly behind main title */}
+          <motion.h1
+            style={{ y: yParallax }}
+            className="absolute text-[75px] sm:text-[120px] md:text-[160px] lg:text-[200px] leading-none font-black bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+          >
+            ABOUT ME
+          </motion.h1>
+
+          <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            ABOUT <span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">ME</span>
+          </h2>
+        </div>
+
         <motion.div
           animate={{ width: ["10%", "24%", "12%"] }}
           initial={{ width: 0 }}
@@ -61,7 +65,7 @@ const AboutMe = () => {
             repeat: Infinity,
             repeatType: "reverse",
           }}
-          className="h-1 bg-gradient-to-r from-green-400 to-teal-400 mt-4 mx-auto rounded-full"
+          className="relative z-10 h-1 bg-gradient-to-r from-green-400 to-teal-400 mt-4 mx-auto rounded-full"
         />
       </motion.div>
 
