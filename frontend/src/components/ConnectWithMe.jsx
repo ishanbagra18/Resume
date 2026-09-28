@@ -49,7 +49,7 @@ const ConnectWithMe = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white py-24 px-4 sm:px-6 lg:px-20 overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+      className="relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white py-24 px-4 sm:px-8 lg:px-12 overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
 
       {/* Background glows */}
@@ -99,7 +99,7 @@ const ConnectWithMe = () => {
       </motion.div>
 
       {/* Two‑column grid */}
-      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
         {/* Left — Photo card & Info */}
         <motion.div

@@ -52,7 +52,7 @@ const TechStack = () => {
     <section
       id="skills"
       ref={sectionRef}
-      className="min-h-screen relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white px-6 py-24 lg:px-20 overflow-hidden flex flex-col justify-center border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+      className="min-h-screen relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white px-4 sm:px-8 py-24 lg:px-12 overflow-hidden flex flex-col justify-center border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Background Glow */}
       <div className="absolute top-[120px] left-1/2 -translate-x-1/2 w-[500px] h-[220px] bg-green-400/10 blur-[130px] rounded-full pointer-events-none" />
@@ -133,7 +133,7 @@ const TechStack = () => {
       </div>
 
       {/* Tech Cards Grid */}
-      <motion.div layout className="relative z-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 max-w-6xl mx-auto w-full">
+      <motion.div layout className="relative z-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 max-w-7xl mx-auto w-full">
         <AnimatePresence>
           {filteredTechs.map(({ name, category, icon: Icon, color }) => (
             <motion.div

@@ -61,7 +61,7 @@ const MyProjects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="min-h-screen bg-slate-100/60 dark:bg-black text-slate-900 dark:text-white px-6 py-24 lg:px-20 overflow-hidden flex flex-col justify-center relative border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+      className="min-h-screen bg-slate-100/60 dark:bg-black text-slate-900 dark:text-white px-4 sm:px-8 py-24 lg:px-12 overflow-hidden flex flex-col justify-center relative border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Background Glow */}
       <div className="absolute top-[120px] left-1/2 -translate-x-1/2 w-[550px] h-[240px] bg-teal-500/10 blur-[150px] rounded-full pointer-events-none" />
@@ -106,7 +106,7 @@ const MyProjects = () => {
       </motion.div>
 
       {/* Projects Grid */}
-      <div className="relative z-10 flex flex-col gap-12 max-w-6xl mx-auto w-full">
+      <div className="relative z-10 flex flex-col gap-12 max-w-7xl mx-auto w-full">
         {projects.map((p, index) => {
           const isEven = index % 2 === 1;
           return (

@@ -60,7 +60,7 @@ const Experience = () => {
     <section
       id="experience"
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-center px-6 py-24 bg-slate-50 dark:bg-black text-slate-900 dark:text-white relative overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 py-24 lg:px-12 bg-slate-50 dark:bg-black text-slate-900 dark:text-white relative overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />
@@ -104,7 +104,7 @@ const Experience = () => {
         />
       </motion.div>
 
-    <div className="relative flex flex-col items-center w-full max-w-3xl z-10 space-y-12">
+    <div className="relative flex flex-col items-center w-full max-w-4xl z-10 space-y-12">
       {/* Vertical Glowing Line */}
       <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-4 h-[calc(100%-2rem)] w-[2px] bg-gradient-to-b from-green-500 via-teal-400 to-slate-300 dark:to-zinc-800 rounded-full shadow-[0_0_12px_rgba(34,197,94,0.5)]" />
       

@@ -49,7 +49,7 @@ const MyCertificate = () => {
     <section
       id="certificates"
       ref={sectionRef}
-      className="min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-white px-6 py-24 lg:px-20 overflow-hidden relative flex flex-col justify-center border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+      className="min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-white px-4 sm:px-8 py-24 lg:px-12 overflow-hidden relative flex flex-col justify-center border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Heading Background Glow */}
       <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[550px] h-[220px] bg-teal-500/10 blur-[150px] pointer-events-none rounded-full" />
@@ -94,7 +94,7 @@ const MyCertificate = () => {
       </motion.div>
 
       {/* Certificate Cards Grid */}
-      <div className="flex flex-wrap justify-center gap-10 z-10 max-w-6xl mx-auto w-full">
+      <div className="flex flex-wrap justify-center gap-10 z-10 max-w-7xl mx-auto w-full">
         {certificates.map(({ title, issuer, type, date, description, skillsVerified, image, link }) => (
           <MorphingDialog
             key={title}

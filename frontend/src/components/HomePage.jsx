@@ -67,7 +67,7 @@ const HomePage = () => {
         </motion.div>
 
         {/* Content layout */}
-        <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-10 px-2 sm:px-4 py-6 max-w-6xl -mt-6 sm:-mt-12 md:-mt-16 z-20">
+        <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-10 px-2 sm:px-4 py-6 max-w-7xl -mt-6 sm:-mt-12 md:-mt-16 z-20">
           
           {/* Left Content */}
           <motion.div

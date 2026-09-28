@@ -24,7 +24,7 @@ const AboutMe = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen relative bg-slate-100/70 dark:bg-zinc-950 text-slate-800 dark:text-gray-200 px-6 py-24 lg:px-20 flex flex-col justify-center overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+      className="min-h-screen relative bg-slate-100/70 dark:bg-zinc-950 text-slate-800 dark:text-gray-200 px-4 sm:px-8 py-24 lg:px-12 flex flex-col justify-center overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Background Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[260px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />
@@ -70,7 +70,7 @@ const AboutMe = () => {
       </motion.div>
 
       {/* Content Layout */}
-      <div className="relative z-10 flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16 max-w-6xl mx-auto w-full">
+      <div className="relative z-10 flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16 max-w-7xl mx-auto w-full">
         
         {/* Left: Bio Text */}
         <div className="flex-1 text-slate-700 dark:text-zinc-300 text-base md:text-lg leading-relaxed tracking-wide space-y-6 flex flex-col justify-center">
