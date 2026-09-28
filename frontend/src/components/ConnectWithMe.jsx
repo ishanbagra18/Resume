@@ -1,13 +1,20 @@
 import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaCopy, FaCheck, FaPaperPlane } from 'react-icons/fa';
 
 const ConnectWithMe = () => {
   const form = useRef(null);
+  const sectionRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [copiedItem, setCopiedItem] = useState(null);
   const [formStatus, setFormStatus] = useState(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-50, 50]);
 
   const copyToClipboard = (text, type) => {
     navigator.clipboard.writeText(text);
@@ -39,7 +46,11 @@ const ConnectWithMe = () => {
   };
 
   return (
-    <section id="contact" className="relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white py-24 px-4 sm:px-6 lg:px-20 overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400">
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white py-24 px-4 sm:px-6 lg:px-20 overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+    >
 
       {/* Background glows */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-green-500/10 blur-[160px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2" />
@@ -56,13 +67,35 @@ const ConnectWithMe = () => {
         <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
           Get In Touch
         </p>
-        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-          LET'S{' '}
-          <span className="bg-gradient-to-r from-green-500 via-teal-400 to-teal-600 dark:from-green-400 dark:via-teal-300 dark:to-teal-500 bg-clip-text text-transparent">
-            CONNECT
-          </span>
-        </h2>
-        <div className="h-1 bg-gradient-to-r from-green-400 to-teal-500 mt-3 mx-auto w-24 rounded-full" />
+
+        <div className="relative inline-block">
+          {/* Parallax Background Text centered directly behind main title */}
+          <motion.h1
+            style={{ y: yParallax }}
+            className="absolute text-[75px] sm:text-[120px] md:text-[160px] lg:text-[200px] leading-none font-black bg-gradient-to-r from-green-500 via-teal-400 to-teal-600 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+          >
+            LET'S CONNECT
+          </motion.h1>
+
+          <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            LET'S{' '}
+            <span className="bg-gradient-to-r from-green-500 via-teal-400 to-teal-600 dark:from-green-400 dark:via-teal-300 dark:to-teal-500 bg-clip-text text-transparent">
+              CONNECT
+            </span>
+          </h2>
+        </div>
+
+        <motion.div
+          animate={{ width: ["10%", "24%", "12%"] }}
+          initial={{ width: 0 }}
+          transition={{
+            duration: 2,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className="relative z-10 h-1 bg-gradient-to-r from-green-400 to-teal-500 mt-4 mx-auto rounded-full"
+        />
       </motion.div>
 
       {/* Two‑column grid */}

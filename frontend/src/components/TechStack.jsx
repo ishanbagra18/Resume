@@ -58,39 +58,43 @@ const TechStack = () => {
       <div className="absolute top-[120px] left-1/2 -translate-x-1/2 w-[500px] h-[220px] bg-green-400/10 blur-[130px] rounded-full pointer-events-none" />
 
       {/* Heading Wrapper */}
-      <div className="relative z-10 mb-12 text-center">
-        <motion.h1
-          style={{ y: yParallax }}
-          className="absolute text-[90px] md:text-[150px] font-extrabold bg-gradient-to-r from-teal-500 to-green-400 bg-clip-text text-transparent opacity-10 dark:opacity-5 -top-12 left-1/2 -translate-x-1/2 select-none pointer-events-none whitespace-nowrap font-AlumniSansSC"
-        >
-          SKILLS & TECH
-        </motion.h1>
+      <motion.div
+        className="relative z-10 mb-16 text-center"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
+          My Toolbox
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
-            My Toolbox
-          </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <div className="relative inline-block">
+          {/* Parallax Background Text centered directly behind main title */}
+          <motion.h1
+            style={{ y: yParallax }}
+            className="absolute text-[75px] sm:text-[120px] md:text-[160px] lg:text-[200px] leading-none font-black bg-gradient-to-r from-teal-500 to-green-400 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+          >
+            SKILLS & TECH
+          </motion.h1>
+
+          <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             TECH-<span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">STACK</span>
           </h2>
-          <motion.div
-            animate={{ width: ['10%', '20%', '5%'] }}
-            initial={{ width: 0 }}
-            transition={{
-              duration: 1.8,
-              ease: 'easeInOut',
-              repeat: Infinity,
-              repeatType: 'reverse',
-            }}
-            className="h-1 bg-gradient-to-r from-green-400 to-teal-500 mt-3 mx-auto rounded-full"
-          />
-        </motion.div>
-      </div>
+        </div>
+
+        <motion.div
+          animate={{ width: ['10%', '20%', '5%'] }}
+          initial={{ width: 0 }}
+          transition={{
+            duration: 1.8,
+            ease: 'easeInOut',
+            repeat: Infinity,
+            repeatType: 'reverse',
+          }}
+          className="relative z-10 h-1 bg-gradient-to-r from-green-400 to-teal-500 mt-4 mx-auto rounded-full"
+        />
+      </motion.div>
 
       {/* Filter Tabs & Search Bar */}
       <div className="relative z-10 max-w-4xl mx-auto w-full mb-10 space-y-5">

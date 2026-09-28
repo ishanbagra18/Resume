@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Briefcase, Trophy, GraduationCap } from "lucide-react";
 
 const experiences = [
@@ -48,20 +48,61 @@ const experiences = [
   }
 ];
 
-const Experience = () => (
-  <section id="experience" className="min-h-screen flex flex-col items-center justify-center px-6 py-24 bg-slate-50 dark:bg-black text-slate-900 dark:text-white relative overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400">
-    {/* Background Glow */}
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />
+const Experience = () => {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-50, 50]);
 
-    <div className="text-center mb-20 relative z-10">
-      <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
-        Career Journey & Achievements
-      </p>
-      <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-        WORK & <span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">EXPERIENCE</span>
-      </h2>
-      <div className="h-1 bg-gradient-to-r from-green-400 to-teal-400 mt-3 mx-auto w-24 rounded-full" />
-    </div>
+  return (
+    <section
+      id="experience"
+      ref={sectionRef}
+      className="min-h-screen flex flex-col items-center justify-center px-6 py-24 bg-slate-50 dark:bg-black text-slate-900 dark:text-white relative overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+    >
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />
+
+      {/* Section Header with Background Text */}
+      <motion.div
+        className="text-center mb-20 relative z-10"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
+          Career Journey & Achievements
+        </p>
+
+        <div className="relative inline-block">
+          {/* Parallax Background Text centered directly behind main title */}
+          <motion.h1
+            style={{ y: yParallax }}
+            className="absolute text-[75px] sm:text-[120px] md:text-[160px] lg:text-[200px] leading-none font-black bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+          >
+            EXPERIENCE
+          </motion.h1>
+
+          <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            WORK & <span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">EXPERIENCE</span>
+          </h2>
+        </div>
+
+        <motion.div
+          animate={{ width: ["10%", "24%", "12%"] }}
+          initial={{ width: 0 }}
+          transition={{
+            duration: 2,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className="relative z-10 h-1 bg-gradient-to-r from-green-400 to-teal-400 mt-4 mx-auto rounded-full"
+        />
+      </motion.div>
 
     <div className="relative flex flex-col items-center w-full max-w-3xl z-10 space-y-12">
       {/* Vertical Glowing Line */}

@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaGithub, FaCode, FaExternalLinkAlt } from 'react-icons/fa';
 
 const cardVariants = {
@@ -16,26 +16,48 @@ const cardVariants = {
 };
 
 const CodingProfiles = () => {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+
   return (
-    <section id="profiles" className="min-h-screen bg-slate-100/70 dark:bg-black text-slate-900 dark:text-white px-6 py-24 lg:px-20 flex flex-col items-center justify-center border-t border-slate-200 dark:border-zinc-900 relative transition-colors duration-400">
+    <section
+      id="profiles"
+      ref={sectionRef}
+      className="min-h-screen bg-slate-100/70 dark:bg-black text-slate-900 dark:text-white px-6 py-24 lg:px-20 flex flex-col items-center justify-center border-t border-slate-200 dark:border-zinc-900 relative transition-colors duration-400 overflow-hidden"
+    >
       
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-purple-500/5 blur-[150px] rounded-full pointer-events-none" />
 
       {/* === Heading === */}
-      <div className="text-center mb-16 relative z-10">
+      <motion.div
+        className="text-center mb-16 relative z-10"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
           Competitive Programming & Open Source
         </p>
-        <motion.h2
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          CODING <span className="bg-gradient-to-r from-purple-500 via-pink-400 to-amber-500 dark:from-purple-400 dark:via-pink-400 dark:to-amber-400 bg-clip-text text-transparent">PROFILES</span>
-        </motion.h2>
+
+        <div className="relative inline-block">
+          {/* Parallax Background Text centered directly behind main title */}
+          <motion.h1
+            style={{ y: yParallax }}
+            className="absolute text-[65px] sm:text-[110px] md:text-[140px] lg:text-[170px] leading-none font-black bg-gradient-to-r from-purple-500 via-pink-400 to-amber-500 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+          >
+            CODING PROFILES
+          </motion.h1>
+
+          <h2 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            CODING <span className="bg-gradient-to-r from-purple-500 via-pink-400 to-amber-500 dark:from-purple-400 dark:via-pink-400 dark:to-amber-400 bg-clip-text text-transparent">PROFILES</span>
+          </h2>
+        </div>
 
         <motion.div
           animate={{ width: ['10%', '30%', '15%'] }}
@@ -46,9 +68,9 @@ const CodingProfiles = () => {
             repeat: Infinity,
             repeatType: 'reverse',
           }}
-          className="h-1 bg-gradient-to-r from-purple-400 to-amber-400 mt-4 mx-auto rounded-full"
+          className="relative z-10 h-1 bg-gradient-to-r from-purple-400 to-amber-400 mt-4 mx-auto rounded-full"
         />
-      </div>
+      </motion.div>
 
       {/* === Cards === */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full max-w-6xl z-10">

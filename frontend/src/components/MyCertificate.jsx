@@ -55,39 +55,43 @@ const MyCertificate = () => {
       <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[550px] h-[220px] bg-teal-500/10 blur-[150px] pointer-events-none rounded-full" />
 
       {/* Heading */}
-      <div className="relative z-10 text-center mb-20">
-        <motion.h1
-          style={{ y: yParallax }}
-          className="absolute text-[90px] md:text-[150px] font-extrabold bg-gradient-to-r from-teal-500 via-green-400 to-cyan-400 bg-clip-text text-transparent opacity-10 dark:opacity-5 -top-10 left-1/2 -translate-x-1/2 select-none pointer-events-none whitespace-nowrap font-AlumniSansSC"
-        >
-          CREDENTIALS
-        </motion.h1>
+      <motion.div
+        className="relative z-10 text-center mb-20"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
+          Verified Honors & Certifications
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
-            Verified Honors & Certifications
-          </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <div className="relative inline-block">
+          {/* Parallax Background Text centered directly behind main title */}
+          <motion.h1
+            style={{ y: yParallax }}
+            className="absolute text-[75px] sm:text-[120px] md:text-[160px] lg:text-[200px] leading-none font-black bg-gradient-to-r from-teal-500 via-green-400 to-cyan-400 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
+          >
+            CREDENTIALS
+          </motion.h1>
+
+          <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             MY <span className="bg-gradient-to-r from-teal-500 via-green-400 to-cyan-500 dark:from-teal-400 dark:via-green-400 dark:to-cyan-400 bg-clip-text text-transparent">CERTIFICATES</span>
           </h2>
-          <motion.div
-            animate={{ width: ['10%', '20%', '5%'] }}
-            initial={{ width: 0 }}
-            transition={{
-              duration: 1.8,
-              ease: 'easeInOut',
-              repeat: Infinity,
-              repeatType: 'reverse',
-            }}
-            className="h-1 bg-gradient-to-r from-teal-400 to-green-400 mt-3 mx-auto rounded-full"
-          />
-        </motion.div>
-      </div>
+        </div>
+
+        <motion.div
+          animate={{ width: ['10%', '20%', '5%'] }}
+          initial={{ width: 0 }}
+          transition={{
+            duration: 1.8,
+            ease: 'easeInOut',
+            repeat: Infinity,
+            repeatType: 'reverse',
+          }}
+          className="relative z-10 h-1 bg-gradient-to-r from-teal-400 to-green-400 mt-4 mx-auto rounded-full"
+        />
+      </motion.div>
 
       {/* Certificate Cards Grid */}
       <div className="flex flex-wrap justify-center gap-10 z-10 max-w-6xl mx-auto w-full">
