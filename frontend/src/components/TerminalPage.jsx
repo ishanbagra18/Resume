@@ -79,6 +79,125 @@ const TerminalPage = () => {
     ]
   };
 
+  // Web Audio API synthesized sound effects
+  const playStartupSound = () => {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      const ctx = new AudioContextClass();
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+
+      const now = ctx.currentTime;
+
+      // 1. Futuristic Arpeggio Boot Sound
+      const frequencies = [329.63, 440, 554.37, 659.25, 880]; // E4, A4, C#5, E5, A5
+      frequencies.forEach((freq, index) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = index % 2 === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, now + index * 0.07);
+
+        gain.gain.setValueAtTime(0.001, now + index * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.12, now + index * 0.07 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + index * 0.07 + 0.45);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now + index * 0.07);
+        osc.stop(now + index * 0.07 + 0.45);
+      });
+
+      // 2. Power-on Lowpass Sweep
+      const sweepOsc = ctx.createOscillator();
+      const sweepGain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      sweepOsc.type = 'sawtooth';
+      sweepOsc.frequency.setValueAtTime(120, now);
+      sweepOsc.frequency.exponentialRampToValueAtTime(520, now + 0.35);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(250, now);
+      filter.frequency.exponentialRampToValueAtTime(1000, now + 0.35);
+
+      sweepGain.gain.setValueAtTime(0.06, now);
+      sweepGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+
+      sweepOsc.connect(filter);
+      filter.connect(sweepGain);
+      sweepGain.connect(ctx.destination);
+
+      sweepOsc.start(now);
+      sweepOsc.stop(now + 0.4);
+    } catch (e) {
+      console.warn("AudioContext startup sound prevented or failed:", e);
+    }
+  };
+
+  const playKeyPressSound = () => {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      const ctx = new AudioContextClass();
+      if (ctx.state === 'suspended') ctx.resume();
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600 + Math.random() * 200, now);
+      
+      gain.gain.setValueAtTime(0.02, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.03);
+    } catch (e) {
+      // ignore user interaction error
+    }
+  };
+
+  const playEnterSound = () => {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      const ctx = new AudioContextClass();
+      if (ctx.state === 'suspended') ctx.resume();
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(880, now);
+      osc.frequency.exponentialRampToValueAtTime(1100, now + 0.06);
+
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.08);
+    } catch (e) {
+      // ignore
+    }
+  };
+
+  // Sound effect on terminal load
+  useEffect(() => {
+    playStartupSound();
+  }, []);
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [history]);
@@ -86,6 +205,8 @@ const TerminalPage = () => {
   const executeCommand = (cmd) => {
     const trimmedCmd = cmd.trim().toLowerCase();
     if (!trimmedCmd) return;
+
+    playEnterSound();
 
     const newHistory = [...history, { type: 'input', text: `ishan@portfolio:~$ ${trimmedCmd}` }];
 
@@ -107,6 +228,8 @@ const TerminalPage = () => {
       e.preventDefault();
       executeCommand(input);
       setInput('');
+    } else if (e.key !== 'Shift' && e.key !== 'Control' && e.key !== 'Alt' && e.key !== 'Meta') {
+      playKeyPressSound();
     }
   };
 

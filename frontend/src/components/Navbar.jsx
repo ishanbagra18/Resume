@@ -125,18 +125,18 @@ const Navbar = () => {
           <button
             onClick={toggleTheme}
             aria-label="Toggle Theme"
-            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            className="p-2 sm:px-3 sm:py-1.5 rounded-full bg-slate-100 dark:bg-white/10 border border-slate-300/80 dark:border-white/10 text-zinc-800 dark:text-zinc-200 hover:border-green-500/50 hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 shadow-sm"
+            title={isDark ? "Currently in Dark Mode. Click to switch to Light Mode" : "Currently in Light Mode. Click to switch to Dark Mode"}
+            className="p-2 sm:px-3 sm:py-1.5 rounded-full bg-slate-100 dark:bg-white/10 border border-slate-300/80 dark:border-white/10 text-zinc-800 dark:text-zinc-200 hover:border-green-500/50 hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 shadow-sm cursor-pointer"
           >
             {isDark ? (
               <>
-                <FaSun className="text-amber-400 text-sm animate-pulse" />
-                <span className="text-[11px] font-mono font-medium hidden md:inline text-amber-400">Light</span>
+                <FaMoon className="text-teal-400 text-sm" />
+                <span className="text-[11px] font-mono font-medium hidden md:inline text-teal-400">Dark</span>
               </>
             ) : (
               <>
-                <FaMoon className="text-indigo-600 text-sm" />
-                <span className="text-[11px] font-mono font-medium hidden md:inline text-indigo-600">Dark</span>
+                <FaSun className="text-amber-500 text-sm animate-pulse" />
+                <span className="text-[11px] font-mono font-medium hidden md:inline text-amber-600">Light</span>
               </>
             )}
           </button>
