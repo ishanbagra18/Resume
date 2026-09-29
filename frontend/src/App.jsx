@@ -3,7 +3,6 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
-import TechMarquee from './components/TechMarquee';
 import AboutMe from './components/AboutMe';
 import TechStack from './components/TechStack';
 import MyProject from './components/MyProject';
@@ -40,7 +39,6 @@ function App() {
             >
               <Navbar />
               <HomePage />
-              <TechMarquee />
               <SectionDivider variant="gradient-line" />
               <AboutMe />
               <SectionDivider variant="dots" />
