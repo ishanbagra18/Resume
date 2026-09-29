@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaCopy, FaCheck, FaPaperPlane } from 'react-icons/fa';
+import { Sparkles } from 'lucide-react';
 
 const ConnectWithMe = () => {
   const form = useRef(null);
@@ -64,7 +65,8 @@ const ConnectWithMe = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-16 relative z-10"
       >
-        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
+        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2 flex items-center justify-center gap-2">
+          <Sparkles className="w-3 h-3 text-green-500" />
           Get In Touch
         </p>
 
@@ -221,7 +223,7 @@ const ConnectWithMe = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col gap-4 bg-white/90 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.7)] text-slate-900 dark:text-white"
+          className="flex flex-col gap-4 bg-white/90 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.7)] text-slate-900 dark:text-white hover:border-green-500/30 transition-all duration-300 relative overflow-hidden group"
         >
           <div className="mb-2">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white font-Poppins">Send Me a Message</h3>

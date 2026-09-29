@@ -1,5 +1,3 @@
-//add the splashScreen 
-
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -10,6 +8,16 @@ const greetings = [
   { text: 'Hola 🌟', lang: 'Spanish' },
   { text: 'Bonjour ✨', lang: 'French' },
 ];
+
+// Floating particles for splash
+const splashParticles = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  size: Math.random() * 3 + 1,
+  delay: Math.random() * 2,
+  duration: Math.random() * 3 + 4,
+}));
 
 const SplashScreen = ({ onComplete }) => {
   const [phase, setPhase] = useState('greetings'); // 'greetings' | 'name' | 'exit'
@@ -69,12 +77,45 @@ const SplashScreen = ({ onComplete }) => {
             }}
           />
 
-          {/* Radial glow */}
+          {/* Radial glow - enhanced with multiple layers */}
           <div className="absolute inset-0 pointer-events-none"
             style={{
               background: 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,197,94,0.08) 0%, transparent 70%)',
             }}
           />
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            animate={{ opacity: [0.03, 0.08, 0.03] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              background: 'radial-gradient(ellipse 40% 35% at 50% 50%, rgba(20,184,166,0.12) 0%, transparent 70%)',
+            }}
+          />
+
+          {/* Floating particles */}
+          {splashParticles.map((p) => (
+            <motion.div
+              key={p.id}
+              className="absolute rounded-full bg-green-500/30"
+              style={{
+                width: p.size,
+                height: p.size,
+                left: `${p.x}%`,
+                top: `${p.y}%`,
+              }}
+              animate={{
+                y: [-20, 20, -20],
+                x: [-10, 10, -10],
+                opacity: [0.2, 0.6, 0.2],
+              }}
+              transition={{
+                duration: p.duration,
+                repeat: Infinity,
+                delay: p.delay,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
 
           {/* Greeting text */}
           <AnimatePresence mode="wait">
@@ -98,6 +139,14 @@ const SplashScreen = ({ onComplete }) => {
                 >
                   {greetings[greetingIndex].text}
                 </span>
+                {/* Language label */}
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.5 }}
+                  className="text-zinc-600 text-xs font-mono mt-2 tracking-widest uppercase"
+                >
+                  {greetings[greetingIndex].lang}
+                </motion.p>
               </motion.div>
             )}
 
@@ -119,14 +168,19 @@ const SplashScreen = ({ onComplete }) => {
                   I'm
                 </motion.p>
 
-                {/* Name */}
+                {/* Name with enhanced animation */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.85, filter: 'blur(12px)' }}
                   animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                   transition={{ delay: 0.15, duration: 0.5, ease: 'easeOut' }}
+                  className="relative"
                 >
+                  {/* Glow behind name */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-[300px] h-[100px] bg-green-500/10 blur-[60px] rounded-full" />
+                  </div>
                   <span
-                    className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tight leading-none"
+                    className="relative text-5xl sm:text-7xl md:text-9xl font-black tracking-tight leading-none"
                     style={{
                       fontFamily: 'Alumni Sans SC, sans-serif',
                       background: 'linear-gradient(135deg, #ffffff 30%, #22c55e 70%, #14b8a6 100%)',
@@ -134,42 +188,79 @@ const SplashScreen = ({ onComplete }) => {
                       WebkitTextFillColor: 'transparent',
                     }}
                   >
-                    ISHAN
+                    ISHAN BAGRA
                   </span>
                 </motion.div>
 
-                {/* Subtitle */}
-                <motion.p
+                {/* Subtitle with staggered dots */}
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
-                  className="text-zinc-500 text-sm sm:text-base tracking-widest uppercase font-mono"
+                  className="flex items-center justify-center gap-3 text-zinc-500 text-sm sm:text-base tracking-widest uppercase font-mono"
                 >
-                  Developer · Designer · Creator
-                </motion.p>
+                  <span>Developer</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                  <span>Designer</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
+                  <span>Creator</span>
+                </motion.div>
 
-                {/* Green bar loader */}
+                {/* Green bar loader - enhanced */}
                 <motion.div
                   className="mx-auto mt-6 h-[2px] rounded-full overflow-hidden"
-                  style={{ width: '160px', background: 'rgba(255,255,255,0.07)' }}
+                  style={{ width: '200px', background: 'rgba(255,255,255,0.07)' }}
                 >
                   <motion.div
                     initial={{ width: '0%' }}
                     animate={{ width: '100%' }}
                     transition={{ delay: 0.3, duration: 1.6, ease: 'easeInOut' }}
                     className="h-full rounded-full"
-                    style={{ background: 'linear-gradient(90deg, #22c55e, #14b8a6)' }}
+                    style={{ background: 'linear-gradient(90deg, #22c55e, #14b8a6, #0ea5e9)' }}
                   />
                 </motion.div>
+
+                {/* Loading text */}
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.4 }}
+                  transition={{ delay: 0.6 }}
+                  className="text-[10px] font-mono text-zinc-600 tracking-wider"
+                >
+                  LOADING PORTFOLIO...
+                </motion.p>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Corner accents */}
-          <div className="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-green-500/30 rounded-tl-md" />
-          <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-green-500/30 rounded-tr-md" />
-          <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-green-500/30 rounded-bl-md" />
-          <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-green-500/30 rounded-br-md" />
+          {/* Corner accents - enhanced with glow */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            <div className="absolute top-6 left-6 w-10 h-10 border-t-2 border-l-2 border-green-500/30 rounded-tl-lg" />
+            <div className="absolute top-6 right-6 w-10 h-10 border-t-2 border-r-2 border-green-500/30 rounded-tr-lg" />
+            <div className="absolute bottom-6 left-6 w-10 h-10 border-b-2 border-l-2 border-green-500/30 rounded-bl-lg" />
+            <div className="absolute bottom-6 right-6 w-10 h-10 border-b-2 border-r-2 border-green-500/30 rounded-br-lg" />
+          </motion.div>
+
+          {/* Bottom status bar */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.3 }}
+            transition={{ delay: 0.5 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 text-[10px] font-mono text-zinc-600"
+          >
+            <span>v2.0</span>
+            <span className="w-[1px] h-3 bg-zinc-800" />
+            <span>2025</span>
+            <span className="w-[1px] h-3 bg-zinc-800" />
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              <span>LIVE</span>
+            </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaTimes, FaStar } from 'react-icons/fa';
+import { Sparkles } from 'lucide-react';
 
 const projects = [
   {
@@ -74,7 +75,8 @@ const MyProjects = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
+        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2 flex items-center justify-center gap-2">
+          <Sparkles className="w-3 h-3 text-teal-500" />
           My Portfolio & Engineering Work
         </p>
 
@@ -116,8 +118,9 @@ const MyProjects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className={`group relative bg-white/90 dark:bg-zinc-950/70 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-2xl p-7 sm:p-9 rounded-3xl shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.7)] transition-all duration-500 ${p.borderColor}`}
+              className={`group relative bg-white/90 dark:bg-zinc-950/70 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-2xl p-7 sm:p-9 rounded-3xl shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.7)] transition-all duration-500 ${p.borderColor} overflow-hidden`}
               style={{ boxShadow: `0 10px 30px rgba(0,0,0,0.06), inset 0 0 30px ${p.glow}` }}
+              whileHover={{ y: -6, transition: { duration: 0.3 } }}
             >
               <div className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 items-center`}>
                 

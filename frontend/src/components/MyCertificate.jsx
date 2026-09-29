@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaExternalLinkAlt, FaCheckCircle, FaAward } from 'react-icons/fa';
-import { Plus } from 'lucide-react';
+import { Plus, Sparkles } from 'lucide-react';
 import {
   MorphingDialog,
   MorphingDialogTrigger,
@@ -62,7 +62,8 @@ const MyCertificate = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
+        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2 flex items-center justify-center gap-2">
+          <Sparkles className="w-3 h-3 text-teal-500" />
           Verified Honors & Certifications
         </p>
 

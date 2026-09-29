@@ -6,6 +6,7 @@ import {
   SiTailwindcss, SiFigma, SiGit, SiSupabase, SiGo, SiGin, SiPython
 } from 'react-icons/si';
 import { FaSearch, FaBrain, FaRobot } from 'react-icons/fa';
+import { Sparkles } from 'lucide-react';
 
 const techs = [
   { name: 'HTML5', category: 'Frontend', icon: SiHtml5, color: '#E44D26' },
@@ -65,7 +66,8 @@ const TechStack = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
+        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2 flex items-center justify-center gap-2">
+          <Sparkles className="w-3 h-3 text-teal-500" />
           My Toolbox
         </p>
 
@@ -135,20 +137,22 @@ const TechStack = () => {
       {/* Tech Cards Grid */}
       <motion.div layout className="relative z-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 max-w-7xl mx-auto w-full">
         <AnimatePresence>
-          {filteredTechs.map(({ name, category, icon: Icon, color }) => (
+          {filteredTechs.map(({ name, category, icon: Icon, color }, idx) => (
             <motion.div
               layout
               key={name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: -10 }}
+              transition={{ duration: 0.35, delay: idx * 0.03 }}
               whileHover={{
-                scale: 1.06,
+                scale: 1.08,
+                y: -6,
                 rotateX: 4,
                 rotateY: 4,
-                boxShadow: `0 12px 30px ${color}40`,
+                boxShadow: `0 16px 40px ${color}35`,
               }}
+              whileTap={{ scale: 0.97 }}
               className="relative group bg-white/90 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800/90 backdrop-blur-xl p-5 rounded-3xl flex flex-col items-center justify-center text-center shadow-md dark:shadow-lg cursor-pointer transition-all duration-300 hover:border-slate-300 dark:hover:border-zinc-700 overflow-hidden"
               style={{ perspective: 1000 }}
             >
@@ -166,12 +170,18 @@ const TechStack = () => {
                 style={{ background: color }}
               />
 
+              {/* Bottom shine on hover */}
+              <div
+                className="absolute bottom-0 left-1/3 right-1/3 h-[1px] opacity-0 group-hover:opacity-50 transition-opacity duration-500 rounded-full blur-sm"
+                style={{ background: color }}
+              />
+
               <div className="relative z-10 flex flex-col items-center">
-                <Icon size={40} style={{ color }} className="transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_4px_10px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
+                <Icon size={40} style={{ color }} className="transition-transform duration-300 group-hover:scale-115 drop-shadow-[0_4px_10px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
                 <p className="mt-3 text-slate-800 dark:text-zinc-200 text-xs md:text-sm font-semibold tracking-wide transition-colors group-hover:text-slate-900 dark:group-hover:text-white">
                   {name}
                 </p>
-                <span className="mt-1 text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
+                <span className="mt-1 text-[10px] font-mono text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-300 transition-colors">
                   {category}
                 </span>
               </div>

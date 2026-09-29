@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
+import TechMarquee from './components/TechMarquee';
 import AboutMe from './components/AboutMe';
 import TechStack from './components/TechStack';
 import MyProject from './components/MyProject';
@@ -14,6 +15,7 @@ import Footer from './components/Footer';
 import VisitorCounter from './components/VisitorCounter';
 import SplashScreen from './components/SplashScreen';
 import TerminalPage from './components/TerminalPage';
+import SectionDivider from './components/SectionDivider';
 
 function App() {
   const [splashDone, setSplashDone] = useState(false);
@@ -38,12 +40,20 @@ function App() {
             >
               <Navbar />
               <HomePage />
+              <TechMarquee />
+              <SectionDivider variant="gradient-line" />
               <AboutMe />
+              <SectionDivider variant="dots" />
               <TechStack />
+              <SectionDivider variant="gradient-line" />
               <MyProject />
+              <SectionDivider variant="dots" />
               <Experience />
+              <SectionDivider variant="gradient-line" />
               <CodingProfiles />
+              <SectionDivider variant="dots" />
               <MyCertificate />
+              <SectionDivider variant="gradient-line" />
               <ConnectWithMe />
               <VisitorCounter />
               <Footer />

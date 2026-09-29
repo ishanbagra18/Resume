@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaGithub, FaCode, FaExternalLinkAlt } from 'react-icons/fa';
+import { Sparkles } from 'lucide-react';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -41,7 +42,8 @@ const CodingProfiles = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2">
+        <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono mb-2 flex items-center justify-center gap-2">
+          <Sparkles className="w-3 h-3 text-purple-500" />
           Competitive Programming & Open Source
         </p>
 
@@ -82,7 +84,8 @@ const CodingProfiles = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="group relative bg-white/90 dark:bg-[#090d13] p-8 rounded-3xl border border-slate-200 dark:border-zinc-800 hover:border-purple-500/40 shadow-xl dark:shadow-[0_10px_35px_rgba(0,0,0,0.7)] hover:shadow-[0_0_35px_rgba(139,92,246,0.25)] transition-all duration-500 min-h-[520px] flex flex-col justify-between"
+          className="group relative bg-white/90 dark:bg-[#090d13] p-8 rounded-3xl border border-slate-200 dark:border-zinc-800 hover:border-purple-500/40 shadow-xl dark:shadow-[0_10px_35px_rgba(0,0,0,0.7)] hover:shadow-[0_0_35px_rgba(139,92,246,0.25)] transition-all duration-500 min-h-[520px] flex flex-col justify-between overflow-hidden"
+          whileHover={{ y: -6, transition: { duration: 0.3 } }}
         >
           {/* Inner purple gradient glow */}
           <div className="absolute -inset-px bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition duration-500 rounded-[inherit] pointer-events-none" />
@@ -156,7 +159,8 @@ const CodingProfiles = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="group relative bg-white/90 dark:bg-[#121212] p-8 rounded-3xl border border-slate-200 dark:border-zinc-800 hover:border-amber-500/40 shadow-xl dark:shadow-[0_10px_35px_rgba(0,0,0,0.7)] hover:shadow-[0_0_35px_rgba(245,158,11,0.25)] transition-all duration-500 min-h-[520px] flex flex-col justify-between"
+          className="group relative bg-white/90 dark:bg-[#121212] p-8 rounded-3xl border border-slate-200 dark:border-zinc-800 hover:border-amber-500/40 shadow-xl dark:shadow-[0_10px_35px_rgba(0,0,0,0.7)] hover:shadow-[0_0_35px_rgba(245,158,11,0.25)] transition-all duration-500 min-h-[520px] flex flex-col justify-between overflow-hidden"
+          whileHover={{ y: -6, transition: { duration: 0.3 } }}
         >
           {/* Inner amber gradient glow */}
           <div className="absolute -inset-px bg-gradient-to-r from-amber-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition duration-500 rounded-[inherit] pointer-events-none" />
