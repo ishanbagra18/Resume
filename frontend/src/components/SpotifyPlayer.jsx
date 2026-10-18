@@ -1,3 +1,5 @@
+//added sportify player 
+
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
