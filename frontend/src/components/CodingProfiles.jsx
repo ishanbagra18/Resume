@@ -22,7 +22,9 @@ const CodingProfiles = () => {
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const yParallax = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-90, 90]);
+  const yLeft = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const yRight = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
     <section
@@ -79,6 +81,7 @@ const CodingProfiles = () => {
         
         {/* === GitHub Card === */}
         <motion.div
+          style={{ y: yLeft }}
           custom={0}
           variants={cardVariants}
           initial="hidden"
@@ -154,6 +157,7 @@ const CodingProfiles = () => {
 
         {/* === LeetCode Card === */}
         <motion.div
+          style={{ y: yRight }}
           custom={1}
           variants={cardVariants}
           initial="hidden"

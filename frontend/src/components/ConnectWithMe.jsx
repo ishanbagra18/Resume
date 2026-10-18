@@ -15,7 +15,9 @@ const ConnectWithMe = () => {
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const yParallax = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-90, 90]);
+  const yPhoto = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const yForm = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   const copyToClipboard = (text, type) => {
     navigator.clipboard.writeText(text);
@@ -105,6 +107,7 @@ const ConnectWithMe = () => {
 
         {/* Left — Photo card & Info */}
         <motion.div
+          style={{ y: yPhoto }}
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -219,6 +222,7 @@ const ConnectWithMe = () => {
         <motion.form
           ref={form}
           onSubmit={sendEmail}
+          style={{ y: yForm }}
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}

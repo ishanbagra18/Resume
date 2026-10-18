@@ -16,6 +16,16 @@ import {
 
 const certificates = [
   {
+    title: 'Smart India Hackathon 2025 — National Winner',
+    issuer: 'Ministry of Education, Govt. of India',
+    type: 'National Level Hackathon',
+    date: '2025',
+    description: 'Awarded as National Winner of Smart India Hackathon 2025, India\'s largest national hackathon organised by the Ministry of Education. Competed against thousands of teams across the country and delivered an impactful solution for a government problem statement.',
+    skillsVerified: ['Full-Stack Development', 'Problem Solving', 'Team Leadership', 'Innovation'],
+    image: '/sih certifigate.png',
+    link: '/sih certifigate.png',
+  },
+  {
     title: 'Building Chatbots with React & GPT APIs',
     issuer: 'H2 Skills',
     type: 'Professional Certification',
@@ -43,7 +53,9 @@ const MyCertificate = () => {
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const yParallax = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-90, 90]);
+  const yCert1 = useTransform(scrollYProgress, [0, 1], [25, -25]);
+  const yCert2 = useTransform(scrollYProgress, [0, 1], [55, -55]);
 
   return (
     <section
@@ -95,22 +107,26 @@ const MyCertificate = () => {
       </motion.div>
 
       {/* Certificate Cards Grid */}
-      <div className="flex flex-wrap justify-center gap-10 z-10 max-w-7xl mx-auto w-full">
-        {certificates.map(({ title, issuer, type, date, description, skillsVerified, image, link }) => (
-          <MorphingDialog
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 z-10 max-w-7xl mx-auto w-full">
+        {certificates.map(({ title, issuer, type, date, description, skillsVerified, image, link }, idx) => (
+          <motion.div
             key={title}
-            transition={{
-              type: 'spring',
-              bounce: 0.05,
-              duration: 0.25,
-            }}
+            style={{ y: idx % 2 === 0 ? yCert1 : yCert2 }}
+            className="w-full"
           >
-            <MorphingDialogTrigger
-              style={{
-                borderRadius: '24px',
+            <MorphingDialog
+              transition={{
+                type: 'spring',
+                bounce: 0.05,
+                duration: 0.25,
               }}
-              className="w-full sm:w-[360px] lg:w-[420px] bg-white/90 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800 rounded-3xl shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.7)] backdrop-blur-2xl hover:border-teal-500/50 hover:shadow-[0_0_35px_rgba(20,184,166,0.25)] transition-all duration-300 group overflow-hidden flex flex-col justify-between"
             >
+              <MorphingDialogTrigger
+                style={{
+                  borderRadius: '24px',
+                }}
+                className="w-full bg-white/90 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800 rounded-3xl shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.7)] backdrop-blur-2xl hover:border-teal-500/50 hover:shadow-[0_0_35px_rgba(20,184,166,0.25)] transition-all duration-300 group overflow-hidden flex flex-col justify-between"
+              >
               <div>
                 {/* Header Tag Bar */}
                 <div className="px-5 py-3 border-b border-slate-200 dark:border-zinc-800/80 bg-slate-100/80 dark:bg-zinc-900/50 flex items-center justify-between text-xs font-mono">
@@ -234,8 +250,9 @@ const MyCertificate = () => {
               </MorphingDialogContent>
             </MorphingDialogContainer>
           </MorphingDialog>
-        ))}
-      </div>
+        </motion.div>
+      ))}
+    </div>
     </section>
   );
 };

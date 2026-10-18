@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaTimes, FaStar } from 'react-icons/fa';
 import { Sparkles } from 'lucide-react';
+import { soundFx } from '../utils/soundEffects';
 
 const projects = [
   {
@@ -50,13 +51,16 @@ const projects = [
 
 const MyProjects = () => {
   const [previewImage, setPreviewImage] = useState(null);
+  const [archProject, setArchProject] = useState(null);
   const sectionRef = useRef(null);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const yParallax = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-90, 90]);
+  const yColA = useTransform(scrollYProgress, [0, 1], [25, -25]);
+  const yColB = useTransform(scrollYProgress, [0, 1], [-25, 25]);
 
   return (
     <section
@@ -125,7 +129,10 @@ const MyProjects = () => {
               <div className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 items-center`}>
                 
                 {/* Details Column */}
-                <div className="flex-1 space-y-4">
+                <motion.div
+                  style={{ y: isEven ? yColB : yColA }}
+                  className="flex-1 space-y-4"
+                >
                   <div className="flex flex-wrap items-center gap-2.5">
                     <span className={`text-[10px] uppercase font-mono px-3 py-1 rounded-full bg-gradient-to-r ${p.accent} text-black font-bold shadow-md`}>
                       {p.category}
@@ -168,8 +175,8 @@ const MyProjects = () => {
                     ))}
                   </div>
 
-                  {/* Links */}
-                  <div className="pt-4 flex items-center gap-4">
+                  {/* Links & Architecture Trigger */}
+                  <div className="pt-4 flex flex-wrap items-center gap-3">
                     <a
                       href={p.link}
                       target="_blank"
@@ -177,13 +184,25 @@ const MyProjects = () => {
                       className={`inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r ${p.accent} text-black font-bold text-xs sm:text-sm hover:scale-105 transition-all shadow-lg`}
                     >
                       <FaGithub size={15} />
-                      <span>View Repository on GitHub</span>
+                      <span>View GitHub Code</span>
                     </a>
+
+                    <button
+                      onClick={() => {
+                        soundFx.playClick();
+                        setArchProject(p);
+                      }}
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-200 font-mono text-xs font-semibold hover:border-green-500/50 hover:text-green-500 transition-all"
+                    >
+                      <Sparkles size={13} className="text-green-500" />
+                      <span>Explore Architecture</span>
+                    </button>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Image Preview Column with macOS Mockup Frame */}
-                <div
+                <motion.div
+                  style={{ y: isEven ? yColA : yColB }}
                   onClick={() => setPreviewImage({ title: p.title, image: p.image })}
                   className="flex-1 w-full overflow-hidden rounded-2xl border border-slate-200 dark:border-zinc-800/90 shadow-2xl relative group/img cursor-pointer bg-slate-900 dark:bg-zinc-950 flex flex-col"
                 >
@@ -212,13 +231,93 @@ const MyProjects = () => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
               </div>
             </motion.div>
           );
         })}
       </div>
+
+      {/* Architecture Detail Modal */}
+      <AnimatePresence>
+        {archProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setArchProject(null)}
+            className="fixed inset-0 z-[999999] bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 cursor-pointer"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              className="relative max-w-2xl w-full bg-white dark:bg-zinc-950 border border-green-500/30 rounded-3xl p-6 sm:p-8 overflow-hidden shadow-2xl text-slate-900 dark:text-white font-sans"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-zinc-800">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-2xl bg-green-500/10 text-green-500 border border-green-500/30">
+                    <Sparkles size={20} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">{archProject.title} Architecture</h3>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">{archProject.subtitle}</p>
+                  </div>
+                </div>
+                <button onClick={() => setArchProject(null)} className="p-2 text-zinc-400 hover:text-white">
+                  <FaTimes size={16} />
+                </button>
+              </div>
+
+              <div className="py-6 space-y-5">
+                <div>
+                  <h4 className="text-xs uppercase tracking-wider font-mono text-green-500 mb-2 font-bold">System Overview & Architecture</h4>
+                  <p className="text-sm text-slate-700 dark:text-zinc-300 leading-relaxed font-light">
+                    {archProject.description}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xs uppercase tracking-wider font-mono text-teal-500 mb-2 font-bold">Key Architectural Features</h4>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+                    {archProject.features.map((feat, idx) => (
+                      <li key={idx} className="p-3 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-green-400" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-xs uppercase tracking-wider font-mono text-purple-500 mb-2 font-bold">Technologies & Protocols</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {archProject.techStack.map((tech, idx) => (
+                      <span key={idx} className="px-3 py-1 bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-200 text-xs rounded-full font-mono font-semibold">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-slate-200 dark:border-zinc-800 flex justify-end">
+                <a
+                  href={archProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-full bg-green-500 text-black font-bold text-xs flex items-center gap-2 shadow-lg hover:scale-105 transition-all"
+                >
+                  <FaGithub size={14} />
+                  <span>Inspect Codebase on GitHub</span>
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Image Modal Preview */}
       <AnimatePresence>

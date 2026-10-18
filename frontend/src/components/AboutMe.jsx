@@ -43,7 +43,9 @@ const AboutMe = () => {
     offset: ["start end", "end start"],
   });
 
-  const yParallax = useTransform(scrollYProgress, [0, 1], [-60, 60]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-90, 90]);
+  const yBio = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const yHighlights = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
     <section
@@ -124,7 +126,10 @@ const AboutMe = () => {
       <div className="relative z-10 flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16 max-w-7xl mx-auto w-full">
         
         {/* Left: Bio Text */}
-        <div className="flex-1 text-slate-700 dark:text-zinc-300 text-base md:text-lg leading-relaxed tracking-wide space-y-6 flex flex-col justify-center">
+        <motion.div
+          style={{ y: yBio }}
+          className="flex-1 text-slate-700 dark:text-zinc-300 text-base md:text-lg leading-relaxed tracking-wide space-y-6 flex flex-col justify-center"
+        >
           <motion.div 
             whileHover={{ y: -4 }}
             transition={{ duration: 0.3 }}
@@ -146,10 +151,11 @@ const AboutMe = () => {
               My full-stack portfolio features real-world applications including <span className="text-green-600 dark:text-green-400 font-medium">GeetHub</span> (Go/Gin & React music app), <span className="text-teal-600 dark:text-teal-400 font-medium">ZeroWaste</span> (surplus food redistribution with Socket.IO), and <span className="text-green-600 dark:text-green-400 font-medium">Portfolio.ai</span> (AI-driven portfolio platform built with Supabase).
             </TextEffect>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Right: Key Stats & Highlights Card */}
         <motion.div
+          style={{ y: yHighlights }}
           className="flex-1 backdrop-blur-xl bg-white/90 dark:bg-zinc-900/50 border border-slate-200 dark:border-zinc-800 p-8 rounded-3xl shadow-xl dark:shadow-[0_10px_40px_rgba(0,0,0,0.6)] flex flex-col justify-between w-full max-w-lg mx-auto lg:mx-0 hover:border-green-500/30 transition-all duration-300 group relative overflow-hidden"
           initial={{ opacity: 0, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -232,6 +238,8 @@ const AboutMe = () => {
         </motion.div>
 
       </div>
+
+
     </section>
   );
 };

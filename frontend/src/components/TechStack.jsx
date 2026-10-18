@@ -3,7 +3,8 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import {
   SiHtml5, SiCss3, SiJavascript, SiReact, SiNodedotjs,
   SiMongodb, SiExpress, SiFramer, SiGreensock,
-  SiTailwindcss, SiFigma, SiGit, SiSupabase, SiGo, SiGin, SiPython
+  SiTailwindcss, SiFigma, SiGit, SiSupabase, SiGo, SiGin, SiPython,
+  SiRedis, SiDocker, SiPostgresql, SiPostman
 } from 'react-icons/si';
 import { FaSearch, FaBrain, FaRobot } from 'react-icons/fa';
 import { Sparkles } from 'lucide-react';
@@ -23,10 +24,14 @@ const techs = [
   { name: 'Python', category: 'Backend', icon: SiPython, color: '#3776AB' },
   { name: 'MongoDB', category: 'Database', icon: SiMongodb, color: '#4DB33D' },
   { name: 'Supabase', category: 'Database', icon: SiSupabase, color: '#3ECF8E' },
+  { name: 'PostgreSQL', category: 'Database', icon: SiPostgresql, color: '#336791' },
+  { name: 'Redis', category: 'Database', icon: SiRedis, color: '#DC382D' },
   { name: 'RAG', category: 'AI & Data', icon: FaBrain, color: '#a855f7' },
   { name: 'LLMs', category: 'AI & Data', icon: FaRobot, color: '#38bdf8' },
   { name: 'Figma', category: 'Tools', icon: SiFigma, color: '#F24E1E' },
   { name: 'Git', category: 'Tools', icon: SiGit, color: '#F1502F' },
+  { name: 'Docker', category: 'Tools', icon: SiDocker, color: '#2496ED' },
+  { name: 'Postman', category: 'Tools', icon: SiPostman, color: '#FF6C37' },
 ];
 
 const categories = ['All', 'Frontend', 'Backend', 'Database', 'AI & Data', 'Animation', 'Tools'];
@@ -41,7 +46,8 @@ const TechStack = () => {
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const yParallax = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-90, 90]);
+  const yGrid = useTransform(scrollYProgress, [0, 1], [35, -35]);
 
   const filteredTechs = techs.filter((t) => {
     const matchesCategory = activeCategory === 'All' || t.category === activeCategory;
@@ -135,7 +141,11 @@ const TechStack = () => {
       </div>
 
       {/* Tech Cards Grid */}
-      <motion.div layout className="relative z-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 max-w-7xl mx-auto w-full">
+      <motion.div
+        layout
+        style={{ y: yGrid }}
+        className="relative z-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 max-w-7xl mx-auto w-full"
+      >
         <AnimatePresence>
           {filteredTechs.map(({ name, category, icon: Icon, color }, idx) => (
             <motion.div

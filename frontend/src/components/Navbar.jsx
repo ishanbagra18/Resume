@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaFileAlt, FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaFileAlt, FaBars, FaTimes, FaSun, FaMoon, FaSpotify, FaSearch } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
+import { soundFx } from '../utils/soundEffects';
 
 const navSections = [
   { id: 'about', label: 'About' },
@@ -18,7 +19,7 @@ const externalLinks = [
   { label: 'LinkedIn', icon: FaLinkedin, href: 'https://www.linkedin.com/in/ishan-bagra-52aa95289/' },
 ];
 
-const Navbar = () => {
+const Navbar = ({ onOpenCmdK = () => {}, onToggleSpotify = () => {} }) => {
   const { theme, toggleTheme, isDark } = useTheme();
   const [activeSection, setActiveSection] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -46,9 +47,13 @@ const Navbar = () => {
 
   const scrollToSection = (id) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(`#${id}`, { offset: -70, duration: 1.2 });
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -123,7 +128,10 @@ const Navbar = () => {
 
           {/* Theme Toggle Button */}
           <button
-            onClick={toggleTheme}
+            onClick={() => {
+              soundFx.playClick();
+              toggleTheme();
+            }}
             aria-label="Toggle Theme"
             title={isDark ? "Currently in Dark Mode. Click to switch to Light Mode" : "Currently in Light Mode. Click to switch to Dark Mode"}
             className="p-2 sm:px-3 sm:py-1.5 rounded-full bg-slate-100 dark:bg-white/10 border border-slate-300/80 dark:border-white/10 text-zinc-800 dark:text-zinc-200 hover:border-green-500/50 hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 shadow-sm cursor-pointer"

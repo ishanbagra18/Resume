@@ -29,8 +29,7 @@ const HomePage = () => {
   const sectionRef = useRef(null);
   const [copied, setCopied] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] });
-  const titleY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+
   
   // Smooth mouse follower
   const mouseX = useMotionValue(0);
@@ -56,8 +55,12 @@ const HomePage = () => {
   };
 
   const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(`#${id}`, { offset: -70, duration: 1.2 });
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -98,13 +101,12 @@ const HomePage = () => {
 
       {/* Main content wrapper */}
       <div className="flex flex-col items-center w-full z-10 my-auto">
-        {/* Large Parallax Name Title */}
-        <motion.div
-          style={{ y: titleY }}
+        {/* Large Name Title */}
+        <div
           className="text-[44px] sm:text-[90px] md:text-[140px] lg:text-[190px] xl:text-[230px] font-black text-slate-200 dark:text-zinc-800/40 text-center font-AlumniSansSC leading-none tracking-tight select-none pointer-events-none transition-colors"
         >
           ISHAN BAGRA
-        </motion.div>
+        </div>
 
         {/* Content layout */}
         <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-10 px-2 sm:px-4 py-6 max-w-7xl -mt-6 sm:-mt-12 md:-mt-16 z-20">
@@ -136,7 +138,7 @@ const HomePage = () => {
                 I am a{' '}
                 <span className="bg-gradient-to-r from-green-500 via-teal-400 to-teal-600 dark:from-green-400 dark:via-teal-300 dark:to-teal-500 bg-clip-text text-transparent inline-block min-h-[1.25em] drop-shadow-[0_0_25px_rgba(34,197,94,0.3)] animate-gradient-text" style={{ backgroundSize: '200% auto' }}>
                   <Typewriter
-                    words={['SIH Winner', 'Designer', 'Full Stack Dev', 'SDE Intern']}
+                    words={['SIH Winner', 'Designer', 'SDE Intern']}
                     loop={true}
                     cursor
                     cursorStyle="_"
@@ -185,7 +187,10 @@ const HomePage = () => {
           </motion.div>
 
           {/* 3D Glowing Tech Cube - Enhanced with orbit rings */}
-          <div className="flex items-center justify-center w-[200px] sm:w-[240px] h-[200px] sm:h-[240px] relative z-20 flex-shrink-0 my-6 lg:my-0" style={{ perspective: '1000px' }}>
+          <div
+            className="flex items-center justify-center w-[200px] sm:w-[240px] h-[200px] sm:h-[240px] relative z-20 flex-shrink-0 my-6 lg:my-0"
+            style={{ perspective: '1000px' }}
+          >
             
             {/* Outer orbit ring */}
             <div className="absolute inset-0 animate-orbit pointer-events-none">

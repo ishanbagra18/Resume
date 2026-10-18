@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
@@ -16,9 +18,54 @@ import SplashScreen from './components/SplashScreen';
 import TerminalPage from './components/TerminalPage';
 import SectionDivider from './components/SectionDivider';
 
+// New Features & Parallax Effects
+import CmdKModal from './components/CmdKModal';
+import DevArcadeModal from './components/DevArcadeModal';
+import FloatingDock from './components/FloatingDock';
+import ScrollProgressBar from './components/ScrollProgressBar';
+import ParallaxBackground from './components/ParallaxBackground';
+import AIAssistant from './components/AIAssistant';
+import SpotifyPlayer from './components/SpotifyPlayer';
+
 function App() {
   const [splashDone, setSplashDone] = useState(false);
+  const [isCmdKOpen, setIsCmdKOpen] = useState(false);
+  const [isArcadeOpen, setIsArcadeOpen] = useState(false);
+  const [isSpotifyOpen, setIsSpotifyOpen] = useState(false);
+
   const navigate = useNavigate();
+
+  // Initialize Lenis Smooth Inertial Scrolling
+  useEffect(() => {
+    if (!splashDone) return;
+
+    const lenis = new Lenis({
+      duration: 1.6,
+      easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)), // Expo out — silky deceleration
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.85,
+      touchMultiplier: 1.2,
+      infinite: false,
+      lerp: 0.07, // Lower = more inertia / buttery feel
+    });
+
+    window.__lenis = lenis;
+
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+      window.__lenis = null;
+    };
+  }, [splashDone]);
 
   return (
     <ThemeProvider>
@@ -30,14 +77,23 @@ function App() {
           path="/"
           element={
             <div
-              className="scroll-smooth relative w-full bg-slate-50 dark:bg-black text-slate-900 dark:text-white min-h-screen transition-colors duration-400"
+              className="relative w-full bg-slate-50 dark:bg-black text-slate-900 dark:text-white min-h-screen transition-colors duration-400"
               style={{
                 opacity: splashDone ? 1 : 0,
                 transition: 'opacity 0.6s ease, background-color 0.4s ease, color 0.4s ease',
                 pointerEvents: splashDone ? 'auto' : 'none',
               }}
             >
-              <Navbar />
+              {/* Global Scroll Progress Bar */}
+              <ScrollProgressBar />
+
+              {/* Floating Ambient Parallax Depth Background */}
+              <ParallaxBackground />
+
+              <Navbar
+                onOpenCmdK={() => setIsCmdKOpen(true)}
+              />
+
               <HomePage />
               <SectionDivider variant="gradient-line" />
               <AboutMe />
@@ -56,15 +112,34 @@ function App() {
               <VisitorCounter />
               <Footer />
 
-              {/* Floating Terminal Button */}
+              {/* Floating Dock & Interactive Modals */}
               {splashDone && (
-                <button
-                  onClick={() => navigate('/terminal')}
-                  className="fixed bottom-6 right-6 z-[100] bg-white/90 dark:bg-zinc-950/90 border border-green-500/40 text-green-600 dark:text-green-400 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full font-mono text-xs sm:text-sm shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:scale-105 hover:bg-green-500/10 hover:border-green-400 backdrop-blur-xl transition-all flex items-center gap-2"
-                >
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-ping" />
-                  <span>&gt;_ Terminal Mode</span>
-                </button>
+                <>
+                  <FloatingDock
+                    onOpenCmdK={() => setIsCmdKOpen(true)}
+                    onToggleSpotify={() => setIsSpotifyOpen((open) => !open)}
+                    isSpotifyOpen={isSpotifyOpen}
+                    onOpenArcade={() => setIsArcadeOpen(true)}
+                  />
+
+                  <CmdKModal
+                    isOpen={isCmdKOpen}
+                    onClose={() => setIsCmdKOpen(false)}
+                    onToggleSpotify={() => setIsSpotifyOpen((open) => !open)}
+                  />
+
+                  <SpotifyPlayer
+                    isOpen={isSpotifyOpen}
+                    onClose={() => setIsSpotifyOpen(false)}
+                  />
+
+                  <DevArcadeModal
+                    isOpen={isArcadeOpen}
+                    onClose={() => setIsArcadeOpen(false)}
+                  />
+
+                  <AIAssistant />
+                </>
               )}
             </div>
           }

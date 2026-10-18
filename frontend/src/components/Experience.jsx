@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Briefcase, Trophy, GraduationCap, Sparkles } from "lucide-react";
+import { soundFx } from "../utils/soundEffects";
 
 const experiences = [
   {
@@ -51,28 +52,26 @@ const experiences = [
   }
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.96 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  }),
-};
-
 const Experience = () => {
+  const [activeFilter, setActiveFilter] = useState("all");
   const sectionRef = useRef(null);
+  
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const yParallax = useTransform(scrollYProgress, [0, 1], [-50, 50]);
-  const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ['0%', '100%']);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-90, 90]);
+  const yEven = useTransform(scrollYProgress, [0, 1], [25, -25]);
+  const yOdd = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const lineHeight = useTransform(scrollYProgress, [0.05, 0.9], ['0%', '100%']);
+
+  const filteredExperiences = experiences.filter(exp => {
+    if (activeFilter === "all") return true;
+    if (activeFilter === "work") return exp.type === "work";
+    if (activeFilter === "achievement") return exp.type === "achievement";
+    if (activeFilter === "education") return exp.type === "education";
+    return true;
+  });
 
   return (
     <section
@@ -82,11 +81,10 @@ const Experience = () => {
     >
       {/* Background Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-20 right-20 w-[300px] h-[200px] bg-teal-500/5 blur-[120px] rounded-full pointer-events-none" />
 
-      {/* Section Header with Background Text */}
+      {/* Section Header */}
       <motion.div
-        className="text-center mb-20 relative z-10"
+        className="text-center mb-12 relative z-10"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -113,133 +111,142 @@ const Experience = () => {
         <motion.div
           animate={{ width: ["10%", "24%", "12%"] }}
           initial={{ width: 0 }}
-          transition={{
-            duration: 2,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
+          transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
           className="relative z-10 h-1 bg-gradient-to-r from-green-400 to-teal-400 mt-4 mx-auto rounded-full"
         />
       </motion.div>
 
-    <div className="relative flex flex-col items-center w-full max-w-4xl z-10 space-y-16">
-      {/* Vertical Glowing Line — now scroll-animated */}
-      <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-4 h-[calc(100%-2rem)] w-[2px]">
-        <div className="absolute inset-0 bg-slate-200 dark:bg-zinc-800/50 rounded-full" />
-        <motion.div
-          className="absolute top-0 left-0 w-full bg-gradient-to-b from-green-500 via-teal-400 to-green-500 rounded-full shadow-[0_0_12px_rgba(34,197,94,0.5)]"
-          style={{ height: lineHeight }}
-        />
+      {/* Filter Tabs */}
+      <div className="relative z-10 flex flex-wrap items-center justify-center gap-2.5 mb-14">
+        {[
+          { id: 'all', label: 'All Milestones' },
+          { id: 'work', label: 'Work Experience' },
+          { id: 'achievement', label: 'National Awards' },
+          { id: 'education', label: 'Education' }
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => {
+              soundFx.playClick();
+              setActiveFilter(tab.id);
+            }}
+            className={`px-4 py-2 rounded-full text-xs font-mono font-semibold transition-all duration-300 ${
+              activeFilter === tab.id
+                ? 'bg-gradient-to-r from-green-400 via-teal-400 to-teal-500 text-black shadow-[0_0_20px_rgba(34,197,94,0.4)] scale-105'
+                : 'bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
-      
-      {experiences.map((exp, index) => {
-        const Icon = exp.icon;
-        const isEven = index % 2 === 0;
-        return (
-          <div key={exp.role} className="relative flex flex-col md:flex-row items-center w-full">
-            
-            {/* Center Timeline Icon - Enhanced with glow ring */}
-            <span
-              className="absolute left-6 md:left-1/2 -translate-x-1/2 z-20"
-              aria-hidden="true"
-            >
-              <motion.span
-                whileHover={{ scale: 1.15 }}
-                className={`w-14 h-14 flex items-center justify-center bg-gradient-to-br ${exp.color} rounded-full border-4 border-slate-50 dark:border-black text-black shadow-xl transition-transform relative`}
-                style={{ boxShadow: `0 0 25px ${exp.glowColor}, 0 0 50px ${exp.glowColor}` }}
+
+      <div className="relative flex flex-col items-center w-full max-w-4xl z-10 space-y-16">
+        <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-4 h-[calc(100%-2rem)] w-[2px]">
+          <div className="absolute inset-0 bg-slate-200 dark:bg-zinc-800/50 rounded-full" />
+          <motion.div
+            className="absolute top-0 left-0 w-full bg-gradient-to-b from-green-500 via-teal-400 to-green-500 rounded-full shadow-[0_0_12px_rgba(34,197,94,0.5)]"
+            style={{ height: lineHeight }}
+          />
+        </div>
+        
+        <AnimatePresence mode="popLayout">
+          {filteredExperiences.map((exp, index) => {
+            const Icon = exp.icon;
+            const isEven = index % 2 === 0;
+            return (
+              <motion.div
+                layout
+                key={exp.role}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                className="relative flex flex-col md:flex-row items-center w-full"
               >
-                <Icon className="w-5 h-5 text-black" />
-                {/* Animated pulse ring */}
-                <span 
-                  className="absolute inset-0 rounded-full animate-ping opacity-20"
-                  style={{ backgroundColor: exp.accentColor }}
-                />
-              </motion.span>
-            </span>
+                <span className="absolute left-6 md:left-1/2 -translate-x-1/2 z-20">
+                  <motion.span
+                    whileHover={{ scale: 1.15 }}
+                    className={`w-14 h-14 flex items-center justify-center bg-gradient-to-br ${exp.color} rounded-full border-4 border-slate-50 dark:border-black text-black shadow-xl transition-transform relative`}
+                    style={{ boxShadow: `0 0 25px ${exp.glowColor}` }}
+                  >
+                    <Icon className="w-5 h-5 text-black" />
+                    <span 
+                      className="absolute inset-0 rounded-full animate-ping opacity-20"
+                      style={{ backgroundColor: exp.accentColor }}
+                    />
+                  </motion.span>
+                </span>
 
-            {/* Timeline Content Card - Enhanced */}
-            <motion.div
-              custom={index}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className={`w-full md:w-[calc(50%-2.5rem)] pl-16 md:pl-0 ${
-                isEven ? 'md:mr-auto md:text-right' : 'md:ml-auto md:text-left'
-              }`}
-            >
-              <motion.div 
-                whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                className="relative bg-white/90 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-7 shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.8)] hover:border-green-500/50 hover:shadow-[0_0_30px_rgba(34,197,94,0.2)] transition-all duration-300 group overflow-hidden"
-              >
-                {/* Top gradient accent line */}
-                <div 
-                  className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${exp.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                />
+                <motion.div
+                  style={{ y: isEven ? yEven : yOdd }}
+                  className={`w-full md:w-[calc(50%-2.5rem)] pl-16 md:pl-0 ${
+                    isEven ? 'md:mr-auto md:text-right' : 'md:ml-auto md:text-left'
+                  }`}
+                >
+                  <motion.div 
+                    whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                    className="relative bg-white/90 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-7 shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.8)] hover:border-green-500/50 hover:shadow-[0_0_30px_rgba(34,197,94,0.2)] transition-all duration-300 group overflow-hidden"
+                  >
+                    <div 
+                      className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${exp.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    />
 
-                {/* Subtle background radial glow on hover */}
-                <div 
-                  className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none blur-3xl"
-                  style={{ backgroundColor: `${exp.accentColor}15` }}
-                />
-
-                <div className={`relative z-10 flex flex-wrap items-center gap-2 mb-3 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
-                  <span className="text-xs font-mono font-semibold tracking-wider text-green-600 dark:text-green-400 bg-green-500/10 border border-green-500/30 px-3.5 py-1 rounded-full shadow-sm">
-                    {exp.period}
-                  </span>
-                  <span className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
-                    exp.type === 'achievement' 
-                      ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-600 dark:text-yellow-400' 
-                      : exp.type === 'work' 
-                      ? 'bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400'
-                      : 'bg-teal-500/10 border-teal-500/20 text-teal-600 dark:text-teal-400'
-                  }`}>
-                    {exp.type}
-                  </span>
-                </div>
-
-                <h3 className="relative z-10 text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-1 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">{exp.role}</h3>
-                <div className="relative z-10 text-teal-600 dark:text-teal-400 text-sm font-semibold mb-4">{exp.organization}</div>
-
-                <ul className="relative z-10 space-y-2.5 text-slate-600 dark:text-zinc-300 text-xs sm:text-sm font-light leading-relaxed mb-5 text-left">
-                  {exp.points.map((pt, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5">
-                      <span 
-                        className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 text-[10px] font-bold"
-                        style={{ 
-                          backgroundColor: `${exp.accentColor}15`,
-                          color: exp.accentColor,
-                          border: `1px solid ${exp.accentColor}30`
-                        }}
-                      >
-                        ✓
+                    <div className={`relative z-10 flex flex-wrap items-center gap-2 mb-3 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
+                      <span className="text-xs font-mono font-semibold tracking-wider text-green-600 dark:text-green-400 bg-green-500/10 border border-green-500/30 px-3.5 py-1 rounded-full shadow-sm">
+                        {exp.period}
                       </span>
-                      <span>{pt}</span>
-                    </li>
-                  ))}
-                </ul>
+                      <span className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+                        exp.type === 'achievement' 
+                          ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-600 dark:text-yellow-400' 
+                          : exp.type === 'work' 
+                          ? 'bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400'
+                          : 'bg-teal-500/10 border-teal-500/20 text-teal-600 dark:text-teal-400'
+                      }`}>
+                        {exp.type}
+                      </span>
+                    </div>
 
-                <div className={`relative z-10 flex flex-wrap gap-1.5 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
-                  {exp.tags.map((tag) => (
-                    <motion.span
-                      whileHover={{ scale: 1.08, y: -1 }}
-                      key={tag}
-                      className="text-[10px] font-mono px-3 py-1 rounded-full bg-slate-100 dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-zinc-800 hover:border-teal-500/40 hover:text-teal-600 dark:hover:text-teal-300 transition-colors cursor-default"
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
-                </div>
+                    <h3 className="relative z-10 text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-1 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">{exp.role}</h3>
+                    <div className="relative z-10 text-teal-600 dark:text-teal-400 text-sm font-semibold mb-4">{exp.organization}</div>
+
+                    <ul className="relative z-10 space-y-2.5 text-slate-600 dark:text-zinc-300 text-xs sm:text-sm font-light leading-relaxed mb-5 text-left">
+                      {exp.points.map((pt, idx) => (
+                        <li key={idx} className="flex items-start gap-2.5">
+                          <span 
+                            className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 text-[10px] font-bold"
+                            style={{ 
+                              backgroundColor: `${exp.accentColor}15`,
+                              color: exp.accentColor,
+                              border: `1px solid ${exp.accentColor}30`
+                            }}
+                          >
+                            ✓
+                          </span>
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className={`relative z-10 flex flex-wrap gap-1.5 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
+                      {exp.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-mono px-3 py-1 rounded-full bg-slate-100 dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-zinc-800 hover:border-teal-500/40 transition-colors cursor-default"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
+            );
+          })}
+        </AnimatePresence>
+      </div>
+    </section>
+  );
 };
 
 export default Experience;

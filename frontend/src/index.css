@@ -6,13 +6,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scrolling — native smooth conflicts */
+}
+
 html, body {
   position: relative;
   width: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  scroll-behavior: smooth;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
