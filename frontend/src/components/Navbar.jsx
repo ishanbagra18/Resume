@@ -19,7 +19,7 @@ const externalLinks = [
   { label: 'LinkedIn', icon: FaLinkedin, href: 'https://www.linkedin.com/in/ishan-bagra-52aa95289/' },
 ];
 
-const Navbar = ({ onOpenCmdK = () => {}, onToggleSpotify = () => {} }) => {
+const Navbar = ({ onOpenCmdK = () => {}, onToggleSpotify = () => {}, onOpenMystery = () => {} }) => {
   const { theme, toggleTheme, isDark } = useTheme();
   const [activeSection, setActiveSection] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -111,6 +111,18 @@ const Navbar = ({ onOpenCmdK = () => {}, onToggleSpotify = () => {} }) => {
         {/* Right: Social Links + Theme Toggle */}
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-2">
+            <button
+              onClick={() => {
+                soundFx.playRadar();
+                onOpenMystery();
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500 hover:text-black transition-all shadow-[0_0_12px_rgba(16,185,129,0.2)] cursor-pointer"
+              title="Play Cyber Mystery Game (Case #404)"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>🕵️ Mystery</span>
+            </button>
+
             {externalLinks.map((item) => (
               <a
                 key={item.label}
@@ -188,6 +200,17 @@ const Navbar = ({ onOpenCmdK = () => {}, onToggleSpotify = () => {} }) => {
             </div>
 
             <div className="h-[1px] bg-slate-200 dark:bg-zinc-800 my-1" />
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                soundFx.playRadar();
+                onOpenMystery();
+              }}
+              className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500 hover:text-black transition-all"
+            >
+              <span>🕵️ Play Cyber Mystery Game (Case #404)</span>
+            </button>
 
             <div className="flex flex-wrap gap-2">
               {externalLinks.map((item) => (

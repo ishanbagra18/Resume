@@ -5,8 +5,9 @@ import {
   Terminal, Github, Linkedin, Mail, Phone, Globe,
   ChevronRight, ArrowUpRight, Volume2, VolumeX,
   Copy, ExternalLink, Sparkles, Code2, BriefcaseBusiness,
-  CornerDownLeft, X, Minus
+  CornerDownLeft, X, Minus, ShieldAlert
 } from "lucide-react";
+import CyberMysteryModal from "./CyberMysteryModal";
 
 const LINKS = [
   {
@@ -39,6 +40,7 @@ const QUICK_COMMANDS = [
   { command: "about", label: "About me", icon: Sparkles },
   { command: "skills", label: "Tech stack", icon: Code2 },
   { command: "projects", label: "Projects", icon: Terminal },
+  { command: "mystery", label: "Mystery Game", icon: ShieldAlert },
   { command: "contact", label: "Get in touch", icon: Mail },
 ];
 
@@ -50,6 +52,7 @@ const OUTPUTS = {
     { text: "skills       Explore my technical stack" },
     { text: "projects     Explore my featured projects" },
     { text: "experience   Professional experience" },
+    { text: "mystery      Play Case #404: Cyber Forensics Mystery Game", type: "accent" },
     { text: "contact      All contact information" },
     { text: "email        Send me an email" },
     { text: "phone        Call me" },
@@ -62,6 +65,20 @@ const OUTPUTS = {
     { text: "exit         Return to the visual portfolio" },
     { text: "" },
     { text: "TIP: Use ↑ / ↓ for command history and Tab to autocomplete.", type: "muted" },
+  ],
+
+  mystery: [
+    { text: "CASE FILE #404: PROTOCOL OMEGA // CRITICAL INTRUSION", type: "heading" },
+    { text: "" },
+    { text: "At 03:42 AM, an unauthorized breach compromised Ishan's Git server.", type: "error" },
+    { text: "The Smart India Hackathon production kernel has been encrypted." },
+    { text: "The perpetrator left encrypted evidence across 4 digital crime scenes:" },
+    { text: "  [1] Intercepted Network Headers (Base64 origin payload)" },
+    { text: "  [2] Malicious Git Commit 7d08b3 (Logic bomb backdoor salt)" },
+    { text: "  [3] Encrypted RF Audio Spectrogram (Signal carrier node 404)" },
+    { text: "  [4] Prime Suspect Dossiers (PGP signature verification)" },
+    { text: "" },
+    { text: "Type 'mystery start' or click the prompt button below to launch the Console.", type: "accent" },
   ],
 
   about: [
@@ -152,6 +169,7 @@ const TerminalPage = () => {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [suggestionsOpen, setSuggestionsOpen] = useState(false);
+  const [isMysteryOpen, setIsMysteryOpen] = useState(false);
 
   const terminalRef = useRef(null);
   const inputRef = useRef(null);
@@ -361,6 +379,23 @@ const TerminalPage = () => {
       return;
     }
 
+    if (cmd === "mystery" || cmd === "game" || cmd === "investigate" || cmd === "case") {
+      if (args[0] === "start" || args[0] === "play") {
+        append([{ text: "Launching Cyber Mystery Forensic Console...", type: "system" }]);
+        setIsMysteryOpen(true);
+        return;
+      }
+      append([
+        ...OUTPUTS.mystery,
+        {
+          text: "▶ CLICK TO LAUNCH CYBER DETECTIVE CONSOLE",
+          type: "action",
+          action: () => setIsMysteryOpen(true),
+        },
+      ]);
+      return;
+    }
+
     if (cmd === "sudo") {
       append(["Nice try! You already have root access to your own career."]);
       return;
@@ -376,7 +411,7 @@ const TerminalPage = () => {
     ...Object.keys(OUTPUTS),
     "contact", "email", "phone", "linkedin", "github",
     "portfolio", "gui", "exit", "resume", "whoami",
-    "pwd", "ls", "date", "echo", "clear",
+    "pwd", "ls", "date", "echo", "clear", "mystery", "game", "investigate",
   ].filter((command) => command.startsWith(input.trim().toLowerCase()));
 
   const handleKeyDown = (event) => {
@@ -544,11 +579,11 @@ const TerminalPage = () => {
             </div>
 
             {/* Quick command cards */}
-            <div className="mb-7 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div className="mb-7 grid grid-cols-2 gap-2 sm:grid-cols-5">
               {QUICK_COMMANDS.map(({ command, label, icon: Icon }) => (
                 <button
                   key={command}
-                  onClick={() => executeCommand(command)}
+                  onClick={() => command === "mystery" ? setIsMysteryOpen(true) : executeCommand(command)}
                   className="group flex min-w-0 items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-3 py-3 text-left transition duration-200 hover:-translate-y-0.5 hover:border-emerald-400/25 hover:bg-emerald-400/[0.045] sm:px-4"
                 >
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.045] text-zinc-500 transition group-hover:bg-emerald-400/10 group-hover:text-emerald-300">
@@ -635,6 +670,14 @@ const TerminalPage = () => {
                           {line.text}
                         </span>
                       </span>
+                    ) : line.action ? (
+                      <button
+                        onClick={line.action}
+                        className="inline-flex items-center gap-2 px-3.5 py-2 my-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-mono font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.2)] hover:scale-[1.02] cursor-pointer"
+                      >
+                        <ShieldAlert size={15} className="text-emerald-400 animate-pulse" />
+                        <span>{line.text}</span>
+                      </button>
                     ) : line.href ? (
                       <a
                         href={line.href}
@@ -752,6 +795,12 @@ const TerminalPage = () => {
           }
         }
       `}</style>
+
+      {/* Cyber Mystery Detective Game Modal */}
+      <CyberMysteryModal
+        isOpen={isMysteryOpen}
+        onClose={() => setIsMysteryOpen(false)}
+      />
     </main>
   );
 };

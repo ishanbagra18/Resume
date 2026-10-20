@@ -21,6 +21,7 @@ import SectionDivider from './components/SectionDivider';
 // New Features & Parallax Effects
 import CmdKModal from './components/CmdKModal';
 import DevArcadeModal from './components/DevArcadeModal';
+import CyberMysteryModal from './components/CyberMysteryModal';
 import FloatingDock from './components/FloatingDock';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import ParallaxBackground from './components/ParallaxBackground';
@@ -32,6 +33,7 @@ function App() {
   const [isCmdKOpen, setIsCmdKOpen] = useState(false);
   const [isArcadeOpen, setIsArcadeOpen] = useState(false);
   const [isSpotifyOpen, setIsSpotifyOpen] = useState(false);
+  const [isMysteryOpen, setIsMysteryOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -92,6 +94,7 @@ function App() {
 
               <Navbar
                 onOpenCmdK={() => setIsCmdKOpen(true)}
+                onOpenMystery={() => setIsMysteryOpen(true)}
               />
 
               <HomePage />
@@ -120,12 +123,14 @@ function App() {
                     onToggleSpotify={() => setIsSpotifyOpen((open) => !open)}
                     isSpotifyOpen={isSpotifyOpen}
                     onOpenArcade={() => setIsArcadeOpen(true)}
+                    onOpenMystery={() => setIsMysteryOpen(true)}
                   />
 
                   <CmdKModal
                     isOpen={isCmdKOpen}
                     onClose={() => setIsCmdKOpen(false)}
                     onToggleSpotify={() => setIsSpotifyOpen((open) => !open)}
+                    onOpenMystery={() => setIsMysteryOpen(true)}
                   />
 
                   <SpotifyPlayer
@@ -136,6 +141,11 @@ function App() {
                   <DevArcadeModal
                     isOpen={isArcadeOpen}
                     onClose={() => setIsArcadeOpen(false)}
+                  />
+
+                  <CyberMysteryModal
+                    isOpen={isMysteryOpen}
+                    onClose={() => setIsMysteryOpen(false)}
                   />
 
                   <AIAssistant />

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Command, Sun, Moon, Music, Terminal, FileText, Mail, Github, Linkedin, Code, ExternalLink, Volume2, Sparkles, X } from 'lucide-react';
+import { Search, Command, Sun, Moon, Music, Terminal, FileText, Mail, Github, Linkedin, Code, ExternalLink, Volume2, Sparkles, X, ShieldAlert } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import { soundFx } from '../utils/soundEffects';
 
-const CmdKModal = ({ isOpen, onClose, onToggleSpotify }) => {
+const CmdKModal = ({ isOpen, onClose, onToggleSpotify, onOpenMystery }) => {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { isDark, toggleTheme } = useTheme();
@@ -57,6 +57,7 @@ const CmdKModal = ({ isOpen, onClose, onToggleSpotify }) => {
     { id: 'nav-contact', category: 'Navigation', title: 'Contact Me', subtitle: 'Get in touch for opportunities', icon: Mail, perform: () => scrollToSection('contact') },
 
     // Features & Apps
+    { id: 'app-mystery', category: 'Games & Easter Eggs', title: '🕵️ Play Cyber Mystery: Case #404', subtitle: 'Decode intercepted packets, audit git commits & catch the hacker', icon: ShieldAlert, perform: () => { soundFx.playRadar(); onClose(); onOpenMystery && onOpenMystery(); } },
     { id: 'app-terminal', category: 'Apps', title: 'Open Interactive Terminal', subtitle: 'CLI mode with custom bash commands', icon: Terminal, perform: () => { soundFx.playSuccess(); onClose(); navigate('/terminal'); } },
     { id: 'app-spotify', category: 'Apps', title: 'Toggle Spotify Player', subtitle: 'Play background coding jams & ambient audio', icon: Music, perform: () => { soundFx.playSuccess(); onClose(); onToggleSpotify(); } },
 

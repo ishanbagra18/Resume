@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaSpotify, FaTerminal, FaGamepad, FaSearch, FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
+import { FaSpotify, FaTerminal, FaGamepad, FaSearch, FaVolumeMute, FaVolumeUp, FaUserSecret } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { soundFx } from '../utils/soundEffects';
 
-const FloatingDock = ({ onOpenCmdK, onToggleSpotify, onOpenArcade, isSpotifyOpen }) => {
+const FloatingDock = ({ onOpenCmdK, onToggleSpotify, onOpenArcade, onOpenMystery, isSpotifyOpen }) => {
   const navigate = useNavigate();
 
   return (
@@ -48,6 +48,20 @@ const FloatingDock = ({ onOpenCmdK, onToggleSpotify, onOpenArcade, isSpotifyOpen
           <kbd className="px-1.5 py-0.5 text-[9px] bg-slate-200 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 rounded border border-slate-300 dark:border-zinc-800">
             ⌘K
           </kbd>
+        </button>
+
+        {/* Cyber Mystery Detective Game */}
+        <button
+          onClick={() => {
+            soundFx.playRadar();
+            onOpenMystery && onOpenMystery();
+          }}
+          className="relative p-3 rounded-full text-zinc-700 dark:text-zinc-300 hover:text-emerald-400 dark:hover:text-emerald-300 hover:bg-emerald-500/10 transition-all group"
+          title="🕵️ Cyber Mystery Game: Case #404 (Protocol Omega)"
+        >
+          <FaUserSecret size={17} className="transition-transform group-hover:scale-110" />
+          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500" />
         </button>
 
         {/* Dev Arcade Mini-Game */}
