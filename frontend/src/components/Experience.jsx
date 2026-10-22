@@ -77,7 +77,7 @@ const Experience = () => {
     <section
       id="experience"
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 py-24 lg:px-12 bg-slate-50 dark:bg-black text-slate-900 dark:text-white relative overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+      className="min-h-screen flex flex-col items-center justify-center px-3 sm:px-5 py-24 lg:px-6 bg-slate-50 dark:bg-black text-slate-900 dark:text-white relative overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Background Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />

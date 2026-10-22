@@ -459,7 +459,7 @@ const TerminalPage = () => {
   };
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#050706] px-3 py-6 font-mono text-zinc-300 sm:px-6">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#050706] px-2 sm:px-4 py-6 font-mono text-zinc-300">
 
       {/* Same emerald and teal palette as the original portfolio */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">

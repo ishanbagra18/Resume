@@ -58,7 +58,7 @@ const Navbar = ({ onOpenCmdK = () => {}, onToggleSpotify = () => {}, onOpenMyste
   };
 
   return (
-    <header className="fixed top-4 left-0 w-full z-50 px-3 sm:px-6 md:px-8">
+    <header className="fixed top-4 left-0 w-full z-50 px-2 sm:px-3 lg:px-4">
       <nav
         className={`max-w-7xl mx-auto backdrop-blur-xl transition-all duration-300 rounded-full border px-4 sm:px-6 py-2.5 sm:py-3 flex justify-between items-center ${
           scrolled

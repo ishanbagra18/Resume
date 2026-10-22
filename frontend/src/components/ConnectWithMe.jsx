@@ -52,7 +52,7 @@ const ConnectWithMe = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white py-24 px-4 sm:px-8 lg:px-12 overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+      className="relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white py-24 px-3 sm:px-5 lg:px-6 overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
 
       {/* Background glows */}

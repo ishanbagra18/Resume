@@ -30,7 +30,7 @@ const CodingProfiles = () => {
     <section
       id="profiles"
       ref={sectionRef}
-      className="min-h-screen bg-slate-100/70 dark:bg-black text-slate-900 dark:text-white px-4 sm:px-8 py-24 lg:px-12 flex flex-col items-center justify-center border-t border-slate-200 dark:border-zinc-900 relative transition-colors duration-400 overflow-hidden"
+      className="min-h-screen bg-slate-100/70 dark:bg-black text-slate-900 dark:text-white px-3 sm:px-5 py-24 lg:px-6 flex flex-col items-center justify-center border-t border-slate-200 dark:border-zinc-900 relative transition-colors duration-400 overflow-hidden"
     >
       
       {/* Background Glow */}

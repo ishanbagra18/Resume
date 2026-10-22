@@ -22,7 +22,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-slate-100 dark:bg-black text-slate-900 dark:text-white px-6 py-16 lg:px-20 border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400 overflow-hidden">
+    <footer className="relative bg-slate-100 dark:bg-black text-slate-900 dark:text-white px-3 sm:px-5 py-16 lg:px-6 border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400 overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-green-500/5 blur-[120px] rounded-full pointer-events-none" />
 

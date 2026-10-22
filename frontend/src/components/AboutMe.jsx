@@ -51,7 +51,7 @@ const AboutMe = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen relative bg-slate-100/70 dark:bg-zinc-950 text-slate-800 dark:text-gray-200 px-4 sm:px-8 py-24 lg:px-12 flex flex-col justify-center overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
+      className="min-h-screen relative bg-slate-100/70 dark:bg-zinc-950 text-slate-800 dark:text-gray-200 px-3 sm:px-5 py-24 lg:px-6 flex flex-col justify-center overflow-hidden border-t border-slate-200 dark:border-zinc-900 transition-colors duration-400"
     >
       {/* Background Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[260px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none" />

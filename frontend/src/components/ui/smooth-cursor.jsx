@@ -12,7 +12,7 @@ export function SmoothCursor({
   const [isHovered, setIsHovered] = useState(false);
 
   const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);                                           
 
   const smoothX = useSpring(cursorX, springConfig);
   const smoothY = useSpring(cursorY, springConfig);
