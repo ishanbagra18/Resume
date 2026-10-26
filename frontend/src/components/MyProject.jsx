@@ -86,12 +86,13 @@ const MyProjects = () => {
 
         <div className="relative inline-block max-w-full">
           {/* Parallax Background Text centered directly behind main title */}
-          <motion.h1
+          <motion.span
+            aria-hidden="true"
             style={{ y: yParallax }}
             className="absolute text-[45px] sm:text-[75px] md:text-[105px] lg:text-[130px] leading-none font-black bg-gradient-to-r from-green-500 via-teal-500 to-emerald-400 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
           >
             FEATURED BUILDS
-          </motion.h1>
+          </motion.span>
 
           <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             MY <span className="bg-gradient-to-r from-green-500 via-teal-400 to-teal-600 dark:from-green-400 dark:via-teal-300 dark:to-teal-500 bg-clip-text text-transparent">PROJECTS</span>
@@ -223,6 +224,8 @@ const MyProjects = () => {
                     <img
                       src={p.image}
                       alt={p.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-56 sm:h-64 object-cover group-hover/img:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-xs">
@@ -342,6 +345,7 @@ const MyProjects = () => {
               <img
                 src={previewImage.image}
                 alt={previewImage.title}
+                decoding="async"
                 className="w-full h-auto max-h-[75vh] object-contain rounded-2xl mt-3"
               />
             </div>

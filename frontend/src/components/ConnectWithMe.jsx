@@ -74,12 +74,13 @@ const ConnectWithMe = () => {
 
         <div className="relative inline-block max-w-full">
           {/* Parallax Background Text centered directly behind main title */}
-          <motion.h1
+          <motion.span
+            aria-hidden="true"
             style={{ y: yParallax }}
             className="absolute text-[45px] sm:text-[75px] md:text-[105px] lg:text-[130px] leading-none font-black bg-gradient-to-r from-green-500 via-teal-400 to-teal-600 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
           >
             LET'S CONNECT
-          </motion.h1>
+          </motion.span>
 
           <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             LET'S{' '}
@@ -131,8 +132,10 @@ const ConnectWithMe = () => {
               className="relative overflow-hidden rounded-3xl backdrop-blur-xl border border-slate-200 dark:border-green-500/30 shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.8)] bg-gradient-to-b from-slate-100 dark:from-zinc-900/60 via-slate-200/80 dark:via-zinc-950/80 to-slate-900 dark:to-black"
             >
               <img
-                src="/me.png"
+                src="/me.webp"
                 alt="Ishan Bagra"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[340px] sm:h-[380px] md:h-[420px] object-cover object-[center_82%] block transition-all duration-300"
               />
 

@@ -96,12 +96,13 @@ const Experience = () => {
         </p>
 
         <div className="relative inline-block max-w-full">
-          <motion.h1
+          <motion.span
+            aria-hidden="true"
             style={{ y: yParallax }}
             className="absolute text-[40px] sm:text-[70px] md:text-[95px] lg:text-[125px] leading-none font-black bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
           >
             WORK & EXPERIENCE
-          </motion.h1>
+          </motion.span>
 
           <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             WORK & <span className="bg-gradient-to-r from-green-500 to-teal-500 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent">EXPERIENCE</span>

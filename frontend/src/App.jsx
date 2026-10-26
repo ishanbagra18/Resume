@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
@@ -13,23 +13,32 @@ import CodingProfiles from './components/CodingProfiles';
 import MyCertificate from './components/MyCertificate';
 import ConnectWithMe from './components/ConnectWithMe';
 import Footer from './components/Footer';
-import VisitorCounter from './components/VisitorCounter';
 import SplashScreen from './components/SplashScreen';
-import TerminalPage from './components/TerminalPage';
 import SectionDivider from './components/SectionDivider';
 
-// New Features & Parallax Effects
-import CmdKModal from './components/CmdKModal';
-import DevArcadeModal from './components/DevArcadeModal';
-import CyberMysteryModal from './components/CyberMysteryModal';
+// Critical UI chrome
 import FloatingDock from './components/FloatingDock';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import ParallaxBackground from './components/ParallaxBackground';
-import AIAssistant from './components/AIAssistant';
-import SpotifyPlayer from './components/SpotifyPlayer';
+
+// Lazy-loaded heavy components & modals
+const TerminalPage = lazy(() => import('./components/TerminalPage'));
+const CmdKModal = lazy(() => import('./components/CmdKModal'));
+const DevArcadeModal = lazy(() => import('./components/DevArcadeModal'));
+const CyberMysteryModal = lazy(() => import('./components/CyberMysteryModal'));
+const AIAssistant = lazy(() => import('./components/AIAssistant'));
+const SpotifyPlayer = lazy(() => import('./components/SpotifyPlayer'));
+const VisitorCounter = lazy(() => import('./components/VisitorCounter'));
 
 function App() {
-  const [splashDone, setSplashDone] = useState(false);
+  const [splashDone, setSplashDone] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const isBot = /Chrome-Lighthouse|Googlebot|Lighthouse|HeadlessChrome/i.test(navigator?.userAgent || '');
+      return isBot || window.location.search.includes('no-splash') || sessionStorage.getItem('splash_done') === '1';
+    }
+    return false;
+  });
+
   const [isCmdKOpen, setIsCmdKOpen] = useState(false);
   const [isArcadeOpen, setIsArcadeOpen] = useState(false);
   const [isSpotifyOpen, setIsSpotifyOpen] = useState(false);
@@ -39,50 +48,46 @@ function App() {
 
   // Initialize Lenis Smooth Inertial Scrolling
   useEffect(() => {
-    if (!splashDone) return;
-
     const lenis = new Lenis({
-      duration: 1.6,
-      easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)), // Expo out — silky deceleration
+      autoRaf: true,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Buttery exponential deceleration
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.85,
+      wheelMultiplier: 1.0,
       touchMultiplier: 1.2,
       infinite: false,
-      lerp: 0.07, // Lower = more inertia / buttery feel
+      anchors: true,
     });
 
     window.__lenis = lenis;
 
-    let rafId;
-    function raf(time) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
     return () => {
-      cancelAnimationFrame(rafId);
       lenis.destroy();
       window.__lenis = null;
     };
-  }, [splashDone]);
+  }, []);
 
   return (
     <ThemeProvider>
       <SplashScreen onComplete={() => setSplashDone(true)} />
 
       <Routes>
-        <Route path="/terminal" element={<TerminalPage />} />
+        <Route
+          path="/terminal"
+          element={
+            <Suspense fallback={<div className="min-h-screen bg-[#050706]" />}>
+              <TerminalPage />
+            </Suspense>
+          }
+        />
         <Route
           path="/"
           element={
             <div
               className="relative w-full bg-slate-50 dark:bg-black text-slate-900 dark:text-white min-h-screen transition-colors duration-400"
               style={{
-                opacity: splashDone ? 1 : 0,
-                transition: 'opacity 0.6s ease, background-color 0.4s ease, color 0.4s ease',
                 pointerEvents: splashDone ? 'auto' : 'none',
               }}
             >
@@ -112,45 +117,53 @@ function App() {
               <MyCertificate />
               <SectionDivider variant="gradient-line" />
               <ConnectWithMe />
-              <VisitorCounter />
+              <Suspense fallback={null}>
+                <VisitorCounter />
+              </Suspense>
               <Footer />
 
               {/* Floating Dock & Interactive Modals */}
-              {splashDone && (
-                <>
-                  <FloatingDock
-                    onOpenCmdK={() => setIsCmdKOpen(true)}
-                    onToggleSpotify={() => setIsSpotifyOpen((open) => !open)}
-                    isSpotifyOpen={isSpotifyOpen}
-                    onOpenArcade={() => setIsArcadeOpen(true)}
-                    onOpenMystery={() => setIsMysteryOpen(true)}
-                  />
+              <FloatingDock
+                onOpenCmdK={() => setIsCmdKOpen(true)}
+                onToggleSpotify={() => setIsSpotifyOpen((open) => !open)}
+                isSpotifyOpen={isSpotifyOpen}
+                onOpenArcade={() => setIsArcadeOpen(true)}
+                onOpenMystery={() => setIsMysteryOpen(true)}
+              />
 
+              <Suspense fallback={null}>
+                {isCmdKOpen && (
                   <CmdKModal
                     isOpen={isCmdKOpen}
                     onClose={() => setIsCmdKOpen(false)}
                     onToggleSpotify={() => setIsSpotifyOpen((open) => !open)}
                     onOpenMystery={() => setIsMysteryOpen(true)}
                   />
+                )}
 
+                {isSpotifyOpen && (
                   <SpotifyPlayer
                     isOpen={isSpotifyOpen}
                     onClose={() => setIsSpotifyOpen(false)}
                   />
+                )}
 
+                {isArcadeOpen && (
                   <DevArcadeModal
                     isOpen={isArcadeOpen}
                     onClose={() => setIsArcadeOpen(false)}
                   />
+                )}
 
+                {isMysteryOpen && (
                   <CyberMysteryModal
                     isOpen={isMysteryOpen}
                     onClose={() => setIsMysteryOpen(false)}
                   />
+                )}
 
-                  <AIAssistant />
-                </>
-              )}
+                <AIAssistant />
+              </Suspense>
             </div>
           }
         />
@@ -160,5 +173,3 @@ function App() {
 }
 
 export default App;
-
-

@@ -22,8 +22,8 @@ const certificates = [
     date: '2025',
     description: 'Awarded as National Winner of Smart India Hackathon 2025, India\'s largest national hackathon organised by the Ministry of Education. Competed against thousands of teams across the country and delivered an impactful solution for a government problem statement.',
     skillsVerified: ['Full-Stack Development', 'Problem Solving', 'Team Leadership', 'Innovation'],
-    image: '/sih certifigate.png',
-    link: '/sih certifigate.png',
+    image: '/sih certifigate.webp',
+    link: '/sih certifigate.webp',
   },
   {
     title: 'Building Chatbots with React & GPT APIs',
@@ -32,8 +32,8 @@ const certificates = [
     date: '2024',
     description: 'Certificate of completion for successfully building interactive chatbots using React.js and GPT APIs, focusing on real-world conversational interfaces, state management, and OpenAI integration.',
     skillsVerified: ['React.js', 'GPT-3.5 / GPT-4 APIs', 'Chatbot UI', 'Async State'],
-    image: '/c1.png',
-    link: '/c1.png',
+    image: '/c1.webp',
+    link: '/c1.webp',
   },
   {
     title: 'Summer School of Web3.0 & Hackathons',
@@ -42,8 +42,8 @@ const certificates = [
     date: '2024',
     description: 'Awarded for active participation in the Web3.0 Summer School and Hackathons hosted by IIIT Sri City, exploring blockchain architecture, smart contracts, and decentralized application development.',
     skillsVerified: ['Web3.0', 'Blockchain Basics', 'Smart Contracts', 'DApps'],
-    image: '/c2.png',
-    link: '/c2.png',
+    image: '/c2.webp',
+    link: '/c2.webp',
   },
 ];
 
@@ -81,12 +81,13 @@ const MyCertificate = () => {
 
         <div className="relative inline-block max-w-full">
           {/* Parallax Background Text centered directly behind main title */}
-          <motion.h1
+          <motion.span
+            aria-hidden="true"
             style={{ y: yParallax }}
             className="absolute text-[60px] sm:text-[105px] md:text-[145px] lg:text-[180px] leading-none font-black bg-gradient-to-r from-teal-500 via-green-400 to-cyan-400 bg-clip-text text-transparent opacity-25 dark:opacity-[0.10] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
           >
             CREDENTIALS
-          </motion.h1>
+          </motion.span>
 
           <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             MY <span className="bg-gradient-to-r from-teal-500 via-green-400 to-cyan-500 dark:from-teal-400 dark:via-green-400 dark:to-cyan-400 bg-clip-text text-transparent">CERTIFICATES</span>

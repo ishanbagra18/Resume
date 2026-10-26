@@ -51,12 +51,13 @@ const CodingProfiles = () => {
 
         <div className="relative inline-block max-w-full">
           {/* Parallax Background Text centered directly behind main title */}
-          <motion.h1
+          <motion.span
+            aria-hidden="true"
             style={{ y: yParallax }}
             className="absolute text-[45px] sm:text-[75px] md:text-[105px] lg:text-[130px] leading-none font-black bg-gradient-to-r from-purple-500 via-pink-400 to-amber-500 bg-clip-text text-transparent opacity-20 dark:opacity-[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap tracking-wider font-AlumniSansSC z-0"
           >
             CODING PROFILES
-          </motion.h1>
+          </motion.span>
 
           <h2 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             CODING <span className="bg-gradient-to-r from-purple-500 via-pink-400 to-amber-500 dark:from-purple-400 dark:via-pink-400 dark:to-amber-400 bg-clip-text text-transparent">PROFILES</span>
@@ -115,6 +116,7 @@ const CodingProfiles = () => {
                   alt="GitHub Stats"
                   className="w-full rounded-xl"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -124,6 +126,7 @@ const CodingProfiles = () => {
                   alt="GitHub Streak"
                   className="w-full rounded-xl"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -133,11 +136,15 @@ const CodingProfiles = () => {
                     src="https://img.shields.io/github/followers/ishanbagra18?label=Followers&style=flat&logo=github&color=purple"
                     alt="GitHub followers"
                     className="rounded"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <img
                     src="https://img.shields.io/github/stars/ishanbagra18?label=Stars&style=flat&color=yellow"
                     alt="GitHub stars"
                     className="rounded"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 
@@ -192,6 +199,7 @@ const CodingProfiles = () => {
                   alt="LeetCode Stats"
                   className="w-full rounded-xl"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
 

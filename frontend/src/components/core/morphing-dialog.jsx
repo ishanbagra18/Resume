@@ -129,6 +129,8 @@ export function MorphingDialogImage({ src, alt, className = '', style = {}, ...p
       transition={transition}
       src={src}
       alt={alt}
+      loading="lazy"
+      decoding="async"
       style={style}
       className={className}
       {...props}
