@@ -1,3 +1,5 @@
+// crenditails added for email js
+
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import emailjs from '@emailjs/browser';
