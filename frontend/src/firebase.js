@@ -1,4 +1,6 @@
-// src/firebase.js
+// src/firebase.js 
+// crenditails added for firebase 
+
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
