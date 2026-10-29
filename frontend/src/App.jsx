@@ -34,7 +34,7 @@ function App() {
   const [splashDone, setSplashDone] = useState(() => {
     if (typeof window !== 'undefined') {
       const isBot = /Chrome-Lighthouse|Googlebot|Lighthouse|HeadlessChrome/i.test(navigator?.userAgent || '');
-      return isBot || window.location.search.includes('no-splash') || sessionStorage.getItem('splash_done') === '1';
+      return isBot || window.location.search.includes('no-splash');
     }
     return false;
   });

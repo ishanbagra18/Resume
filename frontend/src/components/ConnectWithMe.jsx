@@ -30,9 +30,13 @@ const ConnectWithMe = () => {
     setLoading(true);
     setFormStatus(null);
 
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
     emailjs
-      .sendForm('service_en40hq9', 'template_5k8ez91', form.current, {
-        publicKey: 'ya8uE8UM4j66HfXzW',
+      .sendForm(serviceId, templateId, form.current, {
+        publicKey: publicKey,
       })
       .then(
         () => {

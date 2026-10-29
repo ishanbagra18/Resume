@@ -17,34 +17,28 @@ const SplashScreen = ({ onComplete }) => {
   const [exitStarted, setExitStarted] = useState(false);
 
   const handleFinish = useCallback(() => {
-    try {
-      sessionStorage.setItem('splash_done', '1');
-    } catch {
-      // ignore in restricted envs
-    }
     setExitStarted(true);
     setPhase('exit');
     onComplete?.();
   }, [onComplete]);
 
   useEffect(() => {
-    // Detect Lighthouse / automated audit bots / previous visit
+    // Detect Lighthouse / automated audit bots or explicit skip query parameter
     const isBotOrAudit =
       typeof navigator !== 'undefined' &&
       /Chrome-Lighthouse|Googlebot|Lighthouse|HeadlessChrome/i.test(navigator.userAgent);
-    const alreadySeen =
-      typeof window !== 'undefined' &&
-      (window.location.search.includes('no-splash') || sessionStorage.getItem('splash_done') === '1');
+    const noSplashParam =
+      typeof window !== 'undefined' && window.location.search.includes('no-splash');
 
-    if (isBotOrAudit || alreadySeen) {
+    if (isBotOrAudit || noSplashParam) {
       handleFinish();
       return;
     }
 
     const timeouts = [];
-    const greetingDuration = 240; // Snappy 240ms per greeting
+    const greetingDuration = 480; // Comfortable ~480ms per greeting
 
-    // Cycle through greetings swiftly
+    // Cycle through greetings smoothly
     greetings.forEach((_, i) => {
       const t = setTimeout(() => {
         setGreetingIndex(i);
@@ -52,24 +46,24 @@ const SplashScreen = ({ onComplete }) => {
       timeouts.push(t);
     });
 
-    // After greetings, show name
+    // After greetings, show name section
     const totalGreetingTime = greetings.length * greetingDuration;
     const nameTimeout = setTimeout(() => {
       setPhase('name');
     }, totalGreetingTime + 80);
     timeouts.push(nameTimeout);
 
-    // Start exit animation — name stays visible for 600ms
+    // Keep name visible with animated loader bar before initiating exit
     const exitTimeout = setTimeout(() => {
       setExitStarted(true);
       setPhase('exit');
-    }, totalGreetingTime + 750);
+    }, totalGreetingTime + 1800);
     timeouts.push(exitTimeout);
 
-    // Call onComplete after exit fade
+    // Call onComplete after exit fade finishes
     const doneTimeout = setTimeout(() => {
       handleFinish();
-    }, totalGreetingTime + 1150);
+    }, totalGreetingTime + 2300);
     timeouts.push(doneTimeout);
 
     // Escape / Space / Enter keys skip
@@ -93,7 +87,7 @@ const SplashScreen = ({ onComplete }) => {
           key="splash"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.02 }}
-          transition={{ duration: 0.35, ease: 'easeInOut' }}
+          transition={{ duration: 0.45, ease: 'easeInOut' }}
           onClick={handleFinish}
           role="button"
           tabIndex={0}
@@ -204,12 +198,12 @@ const SplashScreen = ({ onComplete }) => {
                 {/* Green bar loader */}
                 <motion.div
                   className="mx-auto mt-6 h-[2px] rounded-full overflow-hidden"
-                  style={{ width: '160px', background: 'rgba(255,255,255,0.07)' }}
+                  style={{ width: '180px', background: 'rgba(255,255,255,0.07)' }}
                 >
                   <motion.div
                     initial={{ width: '0%' }}
                     animate={{ width: '100%' }}
-                    transition={{ delay: 0.1, duration: 0.7, ease: 'easeInOut' }}
+                    transition={{ delay: 0.15, duration: 1.2, ease: 'easeInOut' }}
                     className="h-full rounded-full"
                     style={{ background: 'linear-gradient(90deg, #22c55e, #14b8a6)' }}
                   />
